@@ -47,6 +47,10 @@ public class Operator implements Token {
         return dictionary.containsKey(symbol);
     }
 
+    public static Operator get(char symbol) {
+        return get(String.valueOf(symbol));
+    }
+
     public static Operator get(String symbol) {
         return dictionary.get(symbol);
     }
