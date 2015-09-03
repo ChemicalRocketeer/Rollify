@@ -5,10 +5,10 @@ import java.util.Stack;
 /**
  * Created by David Aaron Suddjian on 9/1/2015.
  */
-public class Number implements Token {
+public class NumberToken implements Token {
     private long num;
 
-    public Number(long num) {
+    public NumberToken(long num) {
         this.num = num;
     }
 
