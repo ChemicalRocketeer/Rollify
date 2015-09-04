@@ -5,5 +5,5 @@ package com.digitalrocketry.rollify.core.expression_evaluation;
  */
 public interface Tokenizer {
 
-    public boolean tryTokenize(TokenizationContext context);
+    public boolean tryTokenize(TokenizationContext context, StringScanner tempScanner);
 }
