@@ -10,66 +10,82 @@ import java.util.Stack;
  */
 public class TokenizationContext {
 
-    private List<Tokenizer> tokenizers;
     private StringScanner scanner;
+    private List<Tokenizer> tokenizers;
+    private boolean inParentheses;
     private List<Token> output;
     private Stack<Operator> opStack;
-    private boolean lastTokenWasNumber;
-    private boolean currentTokenIsNumber;
+    private Token lastToken;
     private boolean currentTokenConsumed;
+    private boolean finished;
 
     public TokenizationContext(StringScanner scanner, List<Tokenizer> tokenizers) {
-        this.tokenizers = tokenizers;
+        this(scanner, tokenizers, false);
+    }
+
+    public TokenizationContext(StringScanner scanner, List<Tokenizer> tokenizers, boolean inParentheses) {
         this.scanner = scanner;
+        this.tokenizers = tokenizers;
+        this.inParentheses = inParentheses;
         this.output = new LinkedList<>();
         this.opStack = new Stack<>();
-        this.lastTokenWasNumber = false;
-        this.currentTokenIsNumber = false;
+        this.lastToken = null;
         this.currentTokenConsumed = false;
+        this.finished = false;
     }
 
     public List<Token> tokenize() {
         scanner.skipWhitespace();
-        while (scanner.hasNext()) {
+        this.finished = false;
+        while (scanner.hasNext() && !finished) {
             currentTokenConsumed = false;
-            currentTokenIsNumber = false;
             Iterator<Tokenizer> it = tokenizers.iterator();
             while (it.hasNext() && !currentTokenConsumed) {
-                it.next().tryTokenize(this);
+                // tempScanner allows Tokenizers to freely scan whatever they need to without worrying
+                // about over-scanning. If a something gets tokenized, the tempScanner position will be used,
+                // otherwise it will be thrown out.
+                StringScanner tempScanner = new StringScanner(scanner);
+                if (it.next().tryTokenize(this, tempScanner)) {
+                    this.scanner = tempScanner;
+                    currentTokenConsumed = true;
+                }
             }
-            lastTokenWasNumber = currentTokenIsNumber;
+            if (!currentTokenConsumed) throw new InvalidExpressionException("Invalid symbol: " + scanner.peek());
             scanner.skipWhitespace();
         }
         return output;
     }
 
-    public void commit() {
-        currentTokenConsumed = true;
-    }
-
     public void commitToken(Token t) {
         output.add(t);
-        commit();
+        lastToken = t;
     }
 
     public void commitOperator(Operator o) {
+        lastToken = o;
+    }
 
-        commit();
+    public void finish() {
+        finished = true;
     }
 
     public List<Token> getOutputTokens() {
         return output;
     }
 
-    public StringScanner getScanner() {
-        return scanner;
+    public Stack<Operator> getOpStack() {
+        return opStack;
+    }
+
+    public Token getLastToken() {
+        return lastToken;
     }
 
     public boolean lastTokenWasnumber() {
-        return lastTokenWasNumber;
+        return lastToken.isNumber();
     }
 
-    public void setIsTokenNumber(boolean value) {
-        currentTokenIsNumber = value;
+    public boolean isInParentheses() {
+        return inParentheses;
     }
 }
