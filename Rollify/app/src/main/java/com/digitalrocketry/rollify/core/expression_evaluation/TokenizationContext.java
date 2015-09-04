@@ -61,8 +61,13 @@ public class TokenizationContext {
         lastToken = t;
     }
 
-    public void commitOperator(Operator o) {
-        lastToken = o;
+    public void commitOperator(Operator op) {
+        float precedence = op.getPrecedence();
+        while (opStack.size() > 0 && opStack.peek().getPrecedence() >= precedence) {
+            output.add(opStack.pop());
+        }
+        opStack.push(op);
+        lastToken = op;
     }
 
     public void finish() {
