@@ -22,7 +22,7 @@ public class DieToken extends Token {
     @Override
     public void operate(Stack<Long> stack) {
         if (dieType < 1 || dieType > Utils.MAX_DIE_TYPE) throw new InvalidExpressionException("invalid die");
-        Stack<Long> temp = new Stack<Long>();
+        Stack<Long> temp = new Stack<>();
         dieCount.operate(temp);
         if (temp.size() != 1) throw new InvalidExpressionException();
         long iterations = temp.pop();
