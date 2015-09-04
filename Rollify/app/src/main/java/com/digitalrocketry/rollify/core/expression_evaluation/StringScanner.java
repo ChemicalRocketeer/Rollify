@@ -7,7 +7,7 @@ import java.math.BigInteger;
  */
 public class StringScanner {
 
-    private String s;
+    private final String s;
     private int cursor;
 
     public StringScanner(StringScanner other) {
