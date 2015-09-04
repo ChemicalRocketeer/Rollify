@@ -10,8 +10,8 @@ public class StringScanner {
     private String s;
     private int cursor;
 
-    public int getCursor() {
-        return cursor;
+    public StringScanner(StringScanner other) {
+        this(other.s, other.cursor);
     }
 
     public StringScanner(String s) {
