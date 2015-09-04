@@ -5,7 +5,7 @@ import java.util.Stack;
 /**
  * Created by David Aaron Suddjian on 9/1/2015.
  */
-public class NumberToken implements Token {
+public class NumberToken extends Token {
     private long num;
 
     public NumberToken(long num) {
@@ -13,8 +13,13 @@ public class NumberToken implements Token {
     }
 
     @Override
-    public void Operate(Stack<Long> stack) {
+    public void operate(Stack<Long> stack) {
         stack.push(num);
+    }
+
+    @Override
+    public boolean isNumber() {
+        return true;
     }
 
     @Override

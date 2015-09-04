@@ -13,14 +13,14 @@ public class Operator implements Token {
 
     public static final Operator ADD = new Operator("+", 1f, new Token() {
         @Override
-        public void Operate(Stack<Long> stack) {
+        public void operate(Stack<Long> stack) {
             stack.push(stack.pop() + stack.pop());
         }
     });
 
     public static final Operator SUB = new Operator("-", 1f, new Token() {
         @Override
-        public void Operate(Stack<Long> stack) {
+        public void operate(Stack<Long> stack) {
             long a = stack.pop();
             long b = stack.pop();
             stack.push(b - a);
@@ -29,21 +29,25 @@ public class Operator implements Token {
 
     public static final Operator MUL = new Operator("*", 2f, new Token() {
         @Override
-        public void Operate(Stack<Long> stack) {
+        public void operate(Stack<Long> stack) {
             stack.push(stack.pop() * stack.pop());
         }
     });
 
     public static final Operator DIV = new Operator("/", 2f, new Token() {
         @Override
-        public void Operate(Stack<Long> stack) {
+        public void operate(Stack<Long> stack) {
             long a = stack.pop();
             long b = stack.pop();
             stack.push(b / a);
         }
     });
 
-    public static boolean contains(String symbol) {
+    public static boolean isDefined(char symbol) {
+        return isDefined(String.valueOf(symbol));
+    }
+
+    public static boolean isDefined(String symbol) {
         return dictionary.containsKey(symbol);
     }
 
@@ -72,8 +76,8 @@ public class Operator implements Token {
     }
 
     @Override
-    public void Operate(Stack<Long> stack) {
-        operation.Operate(stack);
+    public void operate(Stack<Long> stack) {
+        operation.operate(stack);
     }
 
     @Override

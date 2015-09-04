@@ -5,12 +5,22 @@ import java.util.Stack;
 /**
  * Created by David Aaron Suddjian on 9/1/2015.
  */
-public class Die implements Token {
+public class DieToken extends Token {
     private Token dieCount;
     private long dieType;
 
+    public DieToken(Token dieCount, long dieType) {
+        this.dieCount = dieCount;
+        this.dieType = dieType;
+    }
+
     @Override
-    public void Operate(Stack<Long> stack) {
+    public boolean isNumber() {
+        return true;
+    }
+
+    @Override
+    public void operate(Stack<Long> stack) {
 
     }
 

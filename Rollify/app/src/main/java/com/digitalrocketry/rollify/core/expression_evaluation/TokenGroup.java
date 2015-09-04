@@ -6,7 +6,7 @@ import java.util.Stack;
 /**
  * Created by David Aaron Suddjian on 9/1/2015.
  */
-public class TokenGroup implements Token {
+public class TokenGroup extends Token {
     private Token iterations;
     private List<Token> contents;
 
@@ -16,7 +16,12 @@ public class TokenGroup implements Token {
     }
 
     @Override
-    public void Operate(Stack<Long> stack) {
+    public void operate(Stack<Long> stack) {
+    }
+
+    @Override
+    public boolean isNumber() {
+        return true;
     }
 
     @Override

@@ -5,6 +5,12 @@ import java.util.Stack;
 /**
  * Created by David Aaron Suddjian on 9/1/2015.
  */
-public interface Token {
-    public void Operate(Stack<Long> stack);
+public abstract class Token {
+
+
+    public abstract void operate(Stack<Long> stack);
+
+    public boolean isNumber() {
+        return false;
+    }
 }
