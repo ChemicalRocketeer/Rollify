@@ -7,7 +7,7 @@ import java.util.Stack;
 /**
  * Created by David Aaron Suddjian on 9/2/2015.
  */
-public class Operator implements Token {
+public class Operator extends Token {
 
     private static final Map<String, Operator> dictionary = new HashMap<>();
 
