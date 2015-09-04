@@ -25,16 +25,13 @@ public class DieToken extends Token {
         Stack<Long> temp = new Stack<Long>();
         dieCount.operate(temp);
         if (temp.size() != 1) throw new InvalidExpressionException();
-        long count = temp.pop();
-        boolean negative = false;
+        long iterations = temp.pop();
         // if count is negative, we will calculate it as if it were positive and then negate the result.
         // i.e. -3d4 is treated as -(3d4)
-        if (count < 0) {
-            negative = true;
-            count = -count;
-        }
-        if (count > Utils.MAX_DIE_COUNT) throw new InvalidExpressionException("too many dice");
-        long[] results = new long[(int) count];
+        boolean negative = iterations < 0;
+        iterations = Math.abs(iterations);
+        if (iterations > Utils.MAX_DIE_COUNT) throw new InvalidExpressionException("too many dice");
+        long[] results = new long[(int) iterations];
         for (int i = 0; i < results.length; i++) {
             results[i] = Utils.RAND.nextLong() % dieType + 1;
         }
