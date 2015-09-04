@@ -63,8 +63,8 @@ public class Operator extends Token {
     private float precedence;
     private Token operation;
 
-    public Operator(String symbol, float precedence, Token operation) {
-        if ((operation instanceof Operator)) throw new AssertionError();
+    private Operator(String symbol, float precedence, Token operation) {
+        assert !(operation instanceof Operator);
         this.symbol = symbol;
         this.precedence = precedence;
         this.operation = operation;
@@ -73,6 +73,10 @@ public class Operator extends Token {
 
     public float getPrecedence() {
         return precedence;
+    }
+
+    public String getSymbol() {
+        return symbol;
     }
 
     @Override
