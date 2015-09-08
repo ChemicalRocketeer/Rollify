@@ -37,7 +37,7 @@ public class StringScanner {
 
     public BigInteger nextBigInteger() {
         StringBuilder steve = new StringBuilder();
-        while (Character.isDigit(peek())) {
+        while (hasNext() && Character.isDigit(peek())) {
             steve.append(next());
         }
         return new BigInteger(steve.toString());
