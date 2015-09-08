@@ -1,4 +1,6 @@
-package com.digitalrocketry.rollify.core.expression_evaluation;
+package com.digitalrocketry.rollify.test.core.expression_evaluation;
+
+import com.digitalrocketry.rollify.core.expression_evaluation.Operator;
 
 import org.junit.Test;
 

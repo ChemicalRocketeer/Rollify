@@ -1,4 +1,6 @@
-package com.digitalrocketry.rollify.core.expression_evaluation;
+package com.digitalrocketry.rollify.test.core.expression_evaluation;
+
+import com.digitalrocketry.rollify.core.expression_evaluation.StringScanner;
 
 import org.junit.Test;
 

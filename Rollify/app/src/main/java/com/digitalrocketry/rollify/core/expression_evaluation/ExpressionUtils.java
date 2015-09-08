@@ -3,7 +3,7 @@ package com.digitalrocketry.rollify.core.expression_evaluation;
 /**
  * Created by David Aaron Suddjian on 9/2/2015.
  */
-public class Utils {
+public class ExpressionUtils {
 
     // this isn't final because tests need to be able to change it
     public static RandomProvider RAND = new StandardRandomProvider();

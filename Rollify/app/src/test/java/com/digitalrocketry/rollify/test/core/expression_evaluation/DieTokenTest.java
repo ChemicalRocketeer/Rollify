@@ -1,4 +1,9 @@
-package com.digitalrocketry.rollify.core.expression_evaluation;
+package com.digitalrocketry.rollify.test.core.expression_evaluation;
+
+import com.digitalrocketry.rollify.core.expression_evaluation.DieToken;
+import com.digitalrocketry.rollify.core.expression_evaluation.NumberToken;
+import com.digitalrocketry.rollify.core.expression_evaluation.RandomProvider;
+import com.digitalrocketry.rollify.core.expression_evaluation.ExpressionUtils;
 
 import org.junit.After;
 import org.junit.Before;
@@ -13,30 +18,16 @@ import static org.junit.Assert.*;
  */
 public class DieTokenTest {
 
-    public static final RandomProvider MIN = new RandomProvider() {
-        @Override
-        public long nextLong(long min, long max) {
-            return min;
-        }
-    };
-
-    public static final RandomProvider MAX = new RandomProvider() {
-        @Override
-        public long nextLong(long min, long max) {
-            return max;
-        }
-    };
-
     private RandomProvider originalRandomProvider;
 
     @Before
     public void setUp() throws Exception {
-        originalRandomProvider = Utils.RAND;
+        originalRandomProvider = ExpressionUtils.RAND;
     }
 
     @After
     public void tearDown() throws Exception {
-        Utils.RAND = originalRandomProvider;
+        ExpressionUtils.RAND = originalRandomProvider;
     }
 
     @Test
@@ -47,14 +38,14 @@ public class DieTokenTest {
 
     @Test
     public void testOperate() throws Exception {
-        Utils.RAND = MIN;
+        ExpressionUtils.RAND = TestingUtils.MIN;
         DieToken toke = new DieToken(new NumberToken(6), 6);
         Stack<Long> stack = new Stack<>();
         toke.operate(stack);
         assertEquals(6, (long) stack.peek());
         assertEquals(1, stack.size());
 
-        Utils.RAND = MAX;
+        ExpressionUtils.RAND = TestingUtils.MAX;
         toke = new DieToken(new NumberToken(2), 6);
         stack = new Stack<>();
         toke.operate(stack);
