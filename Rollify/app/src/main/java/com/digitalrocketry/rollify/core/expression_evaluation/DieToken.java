@@ -33,7 +33,7 @@ public class DieToken extends Token {
         if (iterations > Utils.MAX_DIE_COUNT) throw new InvalidExpressionException("too many dice");
         long[] results = new long[(int) iterations];
         for (int i = 0; i < results.length; i++) {
-            results[i] = Utils.RAND.nextLong() % dieType + 1;
+            results[i] = Utils.RAND.nextLong(1, dieType);
         }
         long total = 0;
         for (long die : results) {

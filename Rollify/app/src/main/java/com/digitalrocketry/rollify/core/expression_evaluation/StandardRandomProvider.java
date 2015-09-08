@@ -10,7 +10,11 @@ public class StandardRandomProvider implements RandomProvider {
     private static final Random RAND = new Random(System.currentTimeMillis());
 
     @Override
-    public long nextLong() {
-        return RAND.nextLong();
+    public long nextLong(long min, long max) {
+        if (min == max) {
+            return max;
+        }
+        long diff = max - min;
+        return RAND.nextLong() % diff + min ;
     }
 }

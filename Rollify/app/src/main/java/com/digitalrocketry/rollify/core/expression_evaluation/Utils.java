@@ -5,6 +5,7 @@ package com.digitalrocketry.rollify.core.expression_evaluation;
  */
 public class Utils {
 
+    // this isn't final because tests need to be able to change it
     public static RandomProvider RAND = new StandardRandomProvider();
 
     public static final long MAX_DIE_COUNT = 1000000;

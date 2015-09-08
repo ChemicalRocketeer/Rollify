@@ -7,5 +7,5 @@ package com.digitalrocketry.rollify.core.expression_evaluation;
  */
 public interface RandomProvider {
 
-    public long nextLong();
+    public long nextLong(long min, long max);
 }
