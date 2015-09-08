@@ -61,8 +61,6 @@ public class StringScannerTest {
         assertEquals(2048, s.nextLong());
         s = new StringScanner(String.valueOf(Long.MAX_VALUE));
         assertEquals(Long.MAX_VALUE, s.nextLong());
-        s = new StringScanner(String.valueOf(Long.MIN_VALUE));
-        assertEquals(Long.MIN_VALUE, s.nextLong());
         s = new StringScanner("0");
         assertEquals(0, s.nextLong());
     }
