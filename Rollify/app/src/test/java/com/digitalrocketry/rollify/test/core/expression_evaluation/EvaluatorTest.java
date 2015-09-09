@@ -54,4 +54,11 @@ public class EvaluatorTest {
         Result r = new Evaluator().evaluate(tokens);
         assertEquals(0, r.getResult());
     }
+
+    @Test
+    public void testEvaluateToken() throws Exception {
+        ExpressionUtils.RAND = TestingUtils.MAX;
+        Result r = new Evaluator().evaluate(new DieToken(new NumberToken(2), 20));
+        assertEquals(40, r.getResult());
+    }
 }
