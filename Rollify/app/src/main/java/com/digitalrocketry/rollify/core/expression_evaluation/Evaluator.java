@@ -65,6 +65,8 @@ public class Evaluator {
                 Token dieCount;
                 if (context.lastTokenWasnumber()) {
                     dieCount = context.getLastToken();
+                    List<Token> outputTokens = context.getOutputTokens();
+                    outputTokens.remove(outputTokens.size() - 1);
                 } else {
                     dieCount = new NumberToken(1);
                 }
@@ -84,6 +86,8 @@ public class Evaluator {
                 Token multiplier;
                 if (context.lastTokenWasnumber()) {
                     multiplier = context.getLastToken();
+                    List<Token> outputTokens = context.getOutputTokens();
+                    outputTokens.remove(outputTokens.size() - 1);
                 } else {
                     multiplier = new NumberToken(1);
                 }
