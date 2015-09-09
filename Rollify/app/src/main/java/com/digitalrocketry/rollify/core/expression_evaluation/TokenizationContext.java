@@ -1,5 +1,6 @@
 package com.digitalrocketry.rollify.core.expression_evaluation;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,6 +19,10 @@ public class TokenizationContext {
     private Token lastToken;
     private boolean currentTokenConsumed;
     private boolean finished;
+
+    public TokenizationContext(TokenizationContext other, boolean inParentheses) {
+        this(other.scanner, other.tokenizers, inParentheses);
+    }
 
     public TokenizationContext(StringScanner scanner, List<Tokenizer> tokenizers) {
         this(scanner, tokenizers, false);
