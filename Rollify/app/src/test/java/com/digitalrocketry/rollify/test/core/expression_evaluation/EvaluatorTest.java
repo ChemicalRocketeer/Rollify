@@ -6,6 +6,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.*;
+
 /**
  * Created by David Aaron Suddjian on 9/8/2015.
  */
@@ -25,21 +30,28 @@ public class EvaluatorTest {
 
     @Test
     public void testEvaluate() throws Exception {
-
+        ExpressionUtils.RAND = TestingUtils.MAX;
+        Evaluator eva = new Evaluator();
+        Result r = eva.evaluate(" 2 * 2d6 + d12 ( 7d8-2) * -3   -9");
+        assertEquals(-1929, r.getResult());
     }
 
     @Test
     public void testEvaluate1() throws Exception {
-
+        List<Tokenizer> tokenizerList = new ArrayList<>();
+        tokenizerList.add(TestingUtils.ONE_OR_ADD);
+        TokenizationContext context = new TokenizationContext(new StringScanner("000"), tokenizerList);
+        Result r = new Evaluator().evaluate(context);
+        assertEquals(2, r.getResult());
     }
 
     @Test
     public void testEvaluate2() throws Exception {
-
-    }
-
-    @Test
-    public void testEvaluate3() throws Exception {
-
+        List<Token> tokens = new ArrayList<>();
+        tokens.add(new NumberToken(1));
+        tokens.add(new NumberToken(1));
+        tokens.add(Operator.SUB);
+        Result r = new Evaluator().evaluate(tokens);
+        assertEquals(0, r.getResult());
     }
 }
