@@ -41,17 +41,21 @@ public class TokenizationContext {
             currentTokenConsumed = false;
             Iterator<Tokenizer> it = tokenizers.iterator();
             while (it.hasNext() && !currentTokenConsumed) {
-                // tempScanner allows Tokenizers to freely scan whatever they need to without worrying
-                // about over-scanning. If a something gets tokenized, the tempScanner position will be used,
-                // otherwise it will be thrown out.
-                StringScanner tempScanner = new StringScanner(scanner);
-                if (it.next().tryTokenize(this, tempScanner)) {
-                    this.scanner = tempScanner;
+                // If the current tokenizer consumes a token,
+                // leave the cursor position where that tokenizer left off. Otherwise we
+                // reset the position for the next tokenizer.
+                int cursorPosition = scanner.getCursor();
+                if (it.next().tryTokenize(this, scanner)) {
                     currentTokenConsumed = true;
+                } else {
+                    scanner.setCursor(cursorPosition);
                 }
             }
             if (!currentTokenConsumed) throw new InvalidExpressionException("Invalid symbol: " + scanner.peek());
             scanner.skipWhitespace();
+        }
+        while (opStack.size() > 0) {
+            output.add(opStack.pop());
         }
         return output;
     }
