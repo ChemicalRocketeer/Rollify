@@ -112,14 +112,10 @@ public class Evaluator {
 
     public Result evaluate(String expression) {
         TokenizationContext context = new TokenizationContext(new StringScanner(expression), tokenizers);
-        return evaluate(expression, context);
+        return evaluate(context);
     }
 
-    public Result evaluate(String expression, TokenizationContext context) {
-        return evaluate(new StringScanner(expression), context);
-    }
-
-    public Result evaluate(StringScanner expression, TokenizationContext context) {
+    public Result evaluate(TokenizationContext context) {
         return evaluate(context.tokenize());
     }
 
