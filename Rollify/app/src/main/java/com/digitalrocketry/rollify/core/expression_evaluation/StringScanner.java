@@ -7,32 +7,32 @@ import java.math.BigInteger;
  */
 public class StringScanner {
 
-    private final String s;
+    private final String str;
     private int cursor;
 
     public StringScanner(StringScanner other) {
-        this(other.s, other.cursor);
+        this(other.str, other.cursor);
     }
 
     public StringScanner(String s) {
         this(s, 0);
     }
 
-    public StringScanner(String s, int cursor) {
-        this.s = s;
+    public StringScanner(String str, int cursor) {
+        this.str = str;
         this.cursor = cursor;
     }
 
     public boolean hasNext() {
-        return cursor < s.length();
+        return cursor < str.length();
     }
 
     public char next() {
-        return s.charAt(cursor++);
+        return str.charAt(cursor++);
     }
 
     public char peek() {
-        return s.charAt(cursor);
+        return str.charAt(cursor);
     }
 
     public BigInteger nextBigInteger() {
@@ -56,6 +56,16 @@ public class StringScanner {
     public void skipWhitespace() {
         while (hasNext() && Character.isWhitespace(peek())) {
             next();
+        }
+    }
+
+    public int getCursor() {
+        return cursor;
+    }
+
+    public void setCursor(int position) {
+        if (position >= 0 && position < str.length()) {
+            this.cursor = position;
         }
     }
 }
