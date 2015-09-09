@@ -1,5 +1,7 @@
 package com.digitalrocketry.rollify.core.expression_evaluation;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 
@@ -27,6 +29,8 @@ public class TokenGroup extends Token {
         for (int i = 0; i < iterations; i++) {
             result += new Evaluator().evaluate(contents).getResult();
         }
+        if (negative)
+            result = -result;
         stack.push(result);
     }
 
@@ -39,10 +43,16 @@ public class TokenGroup extends Token {
     public String toString() {
         StringBuilder steve = new StringBuilder();
         steve.append(iterationToken.toString());
-        for (Token t : contents) {
-            steve.append(" ");
-            steve.append(t.toString());
+        steve.append('(');
+        Iterator<Token> it = contents.iterator();
+        if (it.hasNext()) {
+            steve.append(it.next().toString());
         }
+        while (it.hasNext()) {
+            steve.append(' ');
+            steve.append(it.next().toString());
+        }
+        steve.append(')');
         return steve.toString();
     }
 }
