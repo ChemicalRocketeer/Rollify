@@ -96,7 +96,7 @@ public class TokenizationContext {
     }
 
     public boolean lastTokenWasnumber() {
-        return lastToken.isNumber();
+        return lastToken != null && lastToken.isNumber();
     }
 
     public boolean isInParentheses() {
