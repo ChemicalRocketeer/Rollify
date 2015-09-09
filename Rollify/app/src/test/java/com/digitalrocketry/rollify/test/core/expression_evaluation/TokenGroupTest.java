@@ -35,11 +35,18 @@ public class TokenGroupTest {
         assertEquals(4, (long) stack.peek());
 
         tokens.clear();
-        tokens.add(new NumberToken(1));
+        tokens.add(new NumberToken(-1));
         toke = new TokenGroup(new NumberToken(5), tokens);
         toke.operate(stack);
         assertEquals(3, stack.size());
-        assertEquals(5, (long) stack.peek());
+        assertEquals(-5, (long) stack.peek());
+
+        tokens.clear();
+        tokens.add(new NumberToken(1));
+        toke = new TokenGroup(new NumberToken(-5), tokens);
+        toke.operate(stack);
+        assertEquals(4, stack.size());
+        assertEquals(-5, (long) stack.peek());
     }
 
     @Test
