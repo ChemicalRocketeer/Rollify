@@ -124,6 +124,7 @@ public class Evaluator {
     }
 
     public Result evaluate(List<Token> postfixExpression) {
+        if (postfixExpression.isEmpty()) throw new InvalidExpressionException("empty expression");
         Stack<Long> stack = new Stack<>();
         for (Token t : postfixExpression) {
             t.operate(stack);
