@@ -22,10 +22,7 @@ public class DieToken extends Token {
     @Override
     public void operate(Stack<Long> stack) {
         if (dieType < 1 || dieType > ExpressionUtils.MAX_DIE_TYPE) throw new InvalidExpressionException("invalid die");
-        Stack<Long> temp = new Stack<>();
-        dieCount.operate(temp);
-        if (temp.size() != 1) throw new InvalidExpressionException();
-        long iterations = temp.pop();
+        long iterations = new Evaluator().evaluate(dieCount).getResult();
         // if count is negative, we will calculate it as if it were positive and then negate the result.
         // i.e. -3d4 is treated as -(3d4)
         boolean negative = iterations < 0;

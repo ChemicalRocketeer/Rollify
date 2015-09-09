@@ -19,10 +19,7 @@ public class TokenGroup extends Token {
 
     @Override
     public void operate(Stack<Long> stack) {
-        Stack<Long> temp = new Stack<>();
-        iterationToken.operate(temp);
-        if (temp.size() != 1) throw new InvalidExpressionException();
-        long iterations = temp.pop();
+        long iterations = new Evaluator().evaluate(iterationToken).getResult();
         boolean negative = iterations < 0;
         iterations = Math.abs(iterations);
         long result = 0;
