@@ -11,10 +11,19 @@ public class StandardRandomProvider implements RandomProvider {
 
     @Override
     public long nextLong(long min, long max) {
+        return constrain(RAND.nextLong(), min, max) ;
+    }
+
+    public static long constrain(long value, long min, long max) {
         if (min == max) {
-            return max;
+            long temp = min;
+            min = max;
+            max = temp;
         }
         long diff = max - min;
-        return RAND.nextLong() % diff + min ;
+        value = Math.abs(value);
+        value %= diff + 1;
+        value += min;
+        return value;
     }
 }
