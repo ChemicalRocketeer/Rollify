@@ -39,11 +39,26 @@
         android:textSize="@dimen/abc_text_size_large_material"
         android:onClick="evaluateAndDisplay" />
 
-    <fragment
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.digitalrocketry.rollify.CalcNumpadFragment"
-        android:id="@+id/calcNumpadFragment"
-        tools:layout="@layout/fragment_calc_numpad_linear" />
+        android:layout_height="match_parent">
+
+        <fragment
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:name="com.digitalrocketry.rollify.CalcNumpadFragment"
+            android:id="@+id/calcNumpadFragment"
+            tools:layout="@layout/fragment_calc_numpad_linear" />
+
+        <fragment
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:name="com.digitalrocketry.rollify.tasks.CalcOperatorFragment"
+            android:id="@+id/calcOperatorFragment"
+            tools:layout="@layout/fragment_calc_operator" />
+    </LinearLayout>
 
 </LinearLayout>

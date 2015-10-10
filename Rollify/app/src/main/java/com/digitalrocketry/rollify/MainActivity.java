@@ -34,6 +34,10 @@ public class MainActivity extends AppCompatActivity implements EvaluationTask.Li
         numpadMap.put(R.id.calcNumpad9, "9");
         numpadMap.put(R.id.calcNumpadOpenParen, "(");
         numpadMap.put(R.id.calcNumpadCloseParen, ")");
+        numpadMap.put(R.id.calcOperatorAdd, "+");
+        numpadMap.put(R.id.calcOperatorSub, "-");
+        numpadMap.put(R.id.calcOperatorMul, "*");
+        numpadMap.put(R.id.calcOperatorDiv, "/");
         calcDisplay = (CalculatorDisplayFragment) getFragmentManager().findFragmentById(R.id.calcDisplayFragment);
     }
 
@@ -57,5 +61,9 @@ public class MainActivity extends AppCompatActivity implements EvaluationTask.Li
         if (str != null) {
             calcDisplay.insertTextAtCursor(str);
         }
+    }
+
+    public void onOperatorButton(View view) {
+        onNumpadButtonPressed(view);
     }
 }

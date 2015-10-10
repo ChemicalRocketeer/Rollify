@@ -8,4 +8,7 @@
     <style name="CalcNumpadButtonLinear">
     </style>
 
+    <style name="CalcNumpadOperatorButton">
+    </style>
+
 </resources>
