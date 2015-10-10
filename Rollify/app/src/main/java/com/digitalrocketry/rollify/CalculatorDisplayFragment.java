@@ -38,9 +38,25 @@ public class CalculatorDisplayFragment extends Fragment {
     }
 
     public String getEditorText() {
-        if (expressionEditor == null) {
-            throw new IllegalStateException("Cannot find the expression editor text");
-        }
         return expressionEditor.getText().toString();
+    }
+
+    public void insertTextAtCursor(String text) {
+        int start = Math.max(expressionEditor.getSelectionStart(), 0);
+        int end = Math.max(expressionEditor.getSelectionEnd(), 0);
+        expressionEditor.getEditableText().replace(Math.min(start, end), Math.max(start, end), text);
+    }
+
+    public void backspaceAtCursor() {
+        int pos1 = Math.max(expressionEditor.getSelectionStart(), 0);
+        int pos2 = Math.max(expressionEditor.getSelectionEnd(), 0);
+        int start = Math.min(pos1, pos2);
+        int end = Math.max(pos1, pos2);
+        if (start == end && start > 0) {
+            // the cursor is only at one position, so we move start back to make a selection
+            start --;
+        }
+        expressionEditor.getEditableText().delete(start, end);
+        expressionEditor.setSelection(start, start);
     }
 }

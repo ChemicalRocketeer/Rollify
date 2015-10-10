@@ -16,6 +16,7 @@ import java.util.List;
 public class EvaluationTask extends AsyncTask<String, Void, String> {
 
     public interface Listener {
+        void onEvaluationTaskBegin(EvaluationTask task);
         void onEvaluationTaskComplete(EvaluationTask task);
     }
 
@@ -38,9 +39,16 @@ public class EvaluationTask extends AsyncTask<String, Void, String> {
     }
 
     @Override
+    protected void onPreExecute() {
+        for (Listener l : listeners) {
+            l.onEvaluationTaskBegin(this);
+        }
+    }
+
+    @Override
     protected String doInBackground(String... params) {
         if (params.length != 1)
-            return null;
+            return "asynchronous error";
         try {
             Evaluator eval = new Evaluator();
             Result r = eval.evaluate(params[0]);
