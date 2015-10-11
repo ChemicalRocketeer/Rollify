@@ -6,4 +6,5 @@
     <dimen name="actionButtonHeight">16dp</dimen>
     <dimen name="calcButtonTextSize">24dp</dimen>
     <dimen name="calcOperatorButtonTextSize">30dp</dimen>
+    <dimen name="calcEqualsButtonTextSize">36dp</dimen>
 </resources>

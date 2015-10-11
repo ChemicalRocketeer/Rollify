@@ -339,7 +339,7 @@
         android:onClick="onCalcEqualsButtonPressed"
         app:layout_rowSpan="2"
         android:nestedScrollingEnabled="true"
-        android:textSize="@dimen/calcOperatorButtonTextSize" />
+        android:textSize="@dimen/calcEqualsButtonTextSize" />
 
     <Button
         style="@style/CalcButtonGrid"
