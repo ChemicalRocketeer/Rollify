@@ -41,7 +41,7 @@
     app:rowOrderPreserved="true">
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         app:layout_rowWeight="1"
         app:layout_columnWeight="1"
         app:layout_row="0"
@@ -55,7 +55,7 @@
         android:onClick="onCalcAdvancedButtonPressed" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         app:layout_rowWeight="1"
         app:layout_columnWeight="1"
         app:layout_row="1"
@@ -69,7 +69,7 @@
         android:onClick="onCalcAdvancedButtonPressed" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         app:layout_rowWeight="1"
         app:layout_columnWeight="1"
         app:layout_row="2"
@@ -83,7 +83,7 @@
         android:onClick="onCalcAdvancedButtonPressed" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         app:layout_rowWeight="1"
         app:layout_columnWeight="1"
         app:layout_row="3"
@@ -103,7 +103,7 @@
         android:id="@+id/calcButton7"
         app:layout_rowWeight="1"
         app:layout_columnWeight="1"
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:singleLine="false"
         android:onClick="onCalcNumpadButtonPressed"
@@ -111,7 +111,7 @@
         app:layout_column="1" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="8"
@@ -125,7 +125,7 @@
         app:layout_column="2" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="9"
@@ -139,7 +139,7 @@
         app:layout_column="3" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="4"
@@ -153,7 +153,7 @@
         app:layout_column="1" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="5"
@@ -167,7 +167,7 @@
         app:layout_column="2" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="6"
@@ -181,7 +181,7 @@
         app:layout_column="3" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="1"
@@ -195,7 +195,7 @@
         app:layout_column="1" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="2"
@@ -209,7 +209,7 @@
         app:layout_column="2" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="3"
@@ -223,7 +223,7 @@
         app:layout_column="3" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="0"
@@ -237,7 +237,7 @@
         app:layout_column="1" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="("
@@ -251,7 +251,7 @@
         app:layout_column="2" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text=")"
@@ -265,7 +265,7 @@
         app:layout_column="3" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="+"
@@ -276,10 +276,11 @@
         android:singleLine="false"
         android:onClick="onCalcOperatorButtonPressed"
         app:layout_row="0"
-        app:layout_column="4" />
+        app:layout_column="4"
+        android:textSize="@dimen/calcOperatorButtonTextSize" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="-"
@@ -290,10 +291,11 @@
         android:singleLine="false"
         android:onClick="onCalcOperatorButtonPressed"
         app:layout_row="1"
-        app:layout_column="4" />
+        app:layout_column="4"
+        android:textSize="@dimen/calcOperatorButtonTextSize" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="×"
@@ -304,10 +306,11 @@
         android:singleLine="false"
         android:onClick="onCalcOperatorButtonPressed"
         app:layout_row="2"
-        app:layout_column="4" />
+        app:layout_column="4"
+        android:textSize="@dimen/calcOperatorButtonTextSize" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="÷"
@@ -318,10 +321,11 @@
         android:singleLine="false"
         android:onClick="onCalcOperatorButtonPressed"
         app:layout_row="3"
-        app:layout_column="4" />
+        app:layout_column="4"
+        android:textSize="@dimen/calcOperatorButtonTextSize" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         app:layout_rowWeight="1"
         app:layout_columnWeight="1"
         app:layout_row="4"
@@ -334,10 +338,11 @@
         android:singleLine="false"
         android:onClick="onCalcEqualsButtonPressed"
         app:layout_rowSpan="2"
-        android:nestedScrollingEnabled="true" />
+        android:nestedScrollingEnabled="true"
+        android:textSize="@dimen/calcOperatorButtonTextSize" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         app:layout_rowWeight="1"
         app:layout_columnWeight="1"
         android:layout_width="0dp"
@@ -351,7 +356,7 @@
         app:layout_row="4" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         app:layout_rowWeight="1"
         app:layout_columnWeight="1"
         android:layout_width="0dp"
@@ -365,7 +370,7 @@
         app:layout_row="4" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         app:layout_rowWeight="1"
         app:layout_columnWeight="1"
         android:layout_width="0dp"
@@ -379,7 +384,7 @@
         app:layout_row="4" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         app:layout_rowWeight="1"
         app:layout_columnWeight="1"
         android:layout_width="0dp"
@@ -393,7 +398,7 @@
         app:layout_row="4" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         app:layout_rowWeight="1"
         app:layout_columnWeight="1"
         android:layout_width="0dp"
@@ -407,7 +412,7 @@
         app:layout_row="5" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         app:layout_rowWeight="1"
         app:layout_columnWeight="1"
         android:layout_width="0dp"
@@ -421,7 +426,7 @@
         app:layout_row="5" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         app:layout_rowWeight="1"
         app:layout_columnWeight="1"
         android:layout_width="0dp"
@@ -435,7 +440,7 @@
         app:layout_row="5" />
 
     <Button
-        style="@style/CalcNumpadButtonGrid"
+        style="@style/CalcButtonGrid"
         app:layout_rowWeight="1"
         app:layout_columnWeight="1"
         android:layout_width="0dp"

@@ -15,5 +15,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/calcExpressionDisplay"
         android:layout_gravity="right"
-        android:paddingBottom="@dimen/calcExpressionDisplayPadding" />
+        android:paddingBottom="@dimen/calcExpressionDisplayPadding"
+        android:paddingTop="@dimen/calcExpressionDisplayPadding" />
 </LinearLayout>
