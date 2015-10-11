@@ -5,6 +5,11 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="CalcNumpadButtonGrid">
+        <item name="android:background">@drawable/calc_button</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Large</item>
+    </style>
+
     <style name="CalcNumpadButtonLinear">
     </style>
 
