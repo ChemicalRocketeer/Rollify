@@ -1,4 +1,6 @@
-package com.digitalrocketry.rollify.core.expression_evaluation;
+package com.digitalrocketry.rollify.core.expression_evaluation.tokenization;
+
+import com.digitalrocketry.rollify.core.expression_evaluation.InvalidExpressionException;
 
 import java.math.BigInteger;
 

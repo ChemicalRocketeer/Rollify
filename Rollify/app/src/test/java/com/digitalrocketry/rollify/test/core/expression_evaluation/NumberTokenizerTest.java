@@ -1,9 +1,9 @@
 package com.digitalrocketry.rollify.test.core.expression_evaluation;
 
-import com.digitalrocketry.rollify.core.expression_evaluation.NumberTokenizer;
-import com.digitalrocketry.rollify.core.expression_evaluation.StringScanner;
-import com.digitalrocketry.rollify.core.expression_evaluation.TokenizationContext;
-import com.digitalrocketry.rollify.core.expression_evaluation.Tokenizer;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.NumberTokenizer;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.StringScanner;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.TokenizationContext;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.Tokenizer;
 
 import org.junit.Test;
 

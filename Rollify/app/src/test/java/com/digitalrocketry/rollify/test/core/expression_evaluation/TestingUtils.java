@@ -1,11 +1,11 @@
 package com.digitalrocketry.rollify.test.core.expression_evaluation;
 
-import com.digitalrocketry.rollify.core.expression_evaluation.NumberToken;
-import com.digitalrocketry.rollify.core.expression_evaluation.Operator;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.NumberToken;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Operator;
 import com.digitalrocketry.rollify.core.expression_evaluation.RandomProvider;
-import com.digitalrocketry.rollify.core.expression_evaluation.StringScanner;
-import com.digitalrocketry.rollify.core.expression_evaluation.TokenizationContext;
-import com.digitalrocketry.rollify.core.expression_evaluation.Tokenizer;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.StringScanner;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.TokenizationContext;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.Tokenizer;
 
 /**
  * Created by David Aaron Suddjian on 9/8/2015.

@@ -1,4 +1,8 @@
-package com.digitalrocketry.rollify.core.expression_evaluation;
+package com.digitalrocketry.rollify.core.expression_evaluation.tokens;
+
+import com.digitalrocketry.rollify.core.expression_evaluation.Evaluator;
+import com.digitalrocketry.rollify.core.expression_evaluation.ExpressionUtils;
+import com.digitalrocketry.rollify.core.expression_evaluation.InvalidExpressionException;
 
 import java.util.Stack;
 
@@ -20,6 +24,9 @@ public class DieToken extends Token {
     }
 
     @Override
+    public boolean isVariable() { return true; }
+
+    @Override
     public void operate(Stack<Long> stack) {
         if (dieType < 1 || dieType > ExpressionUtils.MAX_DIE_TYPE) throw new InvalidExpressionException("invalid die");
         long iterations = new Evaluator().evaluate(dieCount).getResult();
@@ -27,7 +34,7 @@ public class DieToken extends Token {
         // i.e. -3d4 is treated as -(3d4)
         boolean negative = iterations < 0;
         iterations = Math.abs(iterations);
-        if (iterations > ExpressionUtils.MAX_DIE_COUNT) throw new InvalidExpressionException("too many dice");
+        if (iterations > ExpressionUtils.MAX_EXPRESSION_ITERATIONS) throw new InvalidExpressionException("too many dice");
         long[] results = new long[(int) iterations];
         for (int i = 0; i < results.length; i++) {
             results[i] = ExpressionUtils.RAND.nextLong(1, dieType);

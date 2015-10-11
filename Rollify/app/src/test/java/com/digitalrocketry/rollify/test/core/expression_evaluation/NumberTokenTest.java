@@ -1,6 +1,6 @@
 package com.digitalrocketry.rollify.test.core.expression_evaluation;
 
-import com.digitalrocketry.rollify.core.expression_evaluation.NumberToken;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.NumberToken;
 
 import org.junit.Test;
 

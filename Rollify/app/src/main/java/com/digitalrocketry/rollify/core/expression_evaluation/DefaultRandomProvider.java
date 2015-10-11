@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * Created by David Aaron Suddjian on 9/4/2015.
  */
-public class StandardRandomProvider implements RandomProvider {
+public class DefaultRandomProvider implements RandomProvider {
 
     private static final Random RAND = new Random(System.currentTimeMillis());
 

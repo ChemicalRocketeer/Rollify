@@ -1,4 +1,4 @@
-package com.digitalrocketry.rollify.core.expression_evaluation;
+package com.digitalrocketry.rollify.core.expression_evaluation.tokenization;
 
 /**
  * Created by David Aaron Suddjian on 9/1/2015.

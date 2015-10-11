@@ -1,4 +1,4 @@
-package com.digitalrocketry.rollify.core.expression_evaluation;
+package com.digitalrocketry.rollify.core.expression_evaluation.tokens;
 
 import java.util.Stack;
 
@@ -13,4 +13,6 @@ public abstract class Token {
     public boolean isNumber() {
         return false;
     }
+
+    public boolean isVariable() { return false; }
 }

@@ -1,4 +1,8 @@
-package com.digitalrocketry.rollify.core.expression_evaluation;
+package com.digitalrocketry.rollify.core.expression_evaluation.tokenization;
+
+import com.digitalrocketry.rollify.core.expression_evaluation.ExpressionUtils;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Token;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.TokenGroup;
 
 import java.util.List;
 

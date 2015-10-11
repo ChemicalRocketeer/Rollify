@@ -1,6 +1,6 @@
 package com.digitalrocketry.rollify.test.core.expression_evaluation;
 
-import com.digitalrocketry.rollify.core.expression_evaluation.StandardRandomProvider;
+import com.digitalrocketry.rollify.core.expression_evaluation.DefaultRandomProvider;
 
 import org.junit.Test;
 
@@ -12,13 +12,13 @@ import static org.junit.Assert.*;
 /**
  * Created by David Aaron Suddjian on 9/10/2015.
  */
-public class StandardRandomProviderTest {
+public class DefaultRandomProviderTest {
 
     @Test
     public void testConstrain() throws Exception {
         List<Integer> results = new ArrayList<>(8000);
         for (int i = -4000; i < 4000; i++) {
-            int v = (int) StandardRandomProvider.constrain(i, 2, 9);
+            int v = (int) DefaultRandomProvider.constrain(i, 2, 9);
             results.add(v);
             assertTrue(v >= 2);
             assertTrue(v <= 9);

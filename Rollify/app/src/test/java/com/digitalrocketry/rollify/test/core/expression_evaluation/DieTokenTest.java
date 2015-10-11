@@ -1,7 +1,7 @@
 package com.digitalrocketry.rollify.test.core.expression_evaluation;
 
-import com.digitalrocketry.rollify.core.expression_evaluation.DieToken;
-import com.digitalrocketry.rollify.core.expression_evaluation.NumberToken;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.DieToken;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.NumberToken;
 import com.digitalrocketry.rollify.core.expression_evaluation.RandomProvider;
 import com.digitalrocketry.rollify.core.expression_evaluation.ExpressionUtils;
 

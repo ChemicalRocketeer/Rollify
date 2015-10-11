@@ -1,6 +1,13 @@
 package com.digitalrocketry.rollify.test.core.expression_evaluation;
 
 import com.digitalrocketry.rollify.core.expression_evaluation.*;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.StringScanner;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.TokenizationContext;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.Tokenizer;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.DieToken;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.NumberToken;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Operator;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Token;
 
 import org.junit.After;
 import org.junit.Before;

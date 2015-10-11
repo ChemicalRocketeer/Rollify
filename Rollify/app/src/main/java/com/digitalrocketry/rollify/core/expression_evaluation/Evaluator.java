@@ -1,5 +1,14 @@
 package com.digitalrocketry.rollify.core.expression_evaluation;
 
+import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.DieDefTokenizer;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.NumberTokenizer;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.OperatorTokenizer;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.ParenTokenizer;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.StringScanner;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.TokenizationContext;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.Tokenizer;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Token;
+
 import java.util.Arrays;
 import java.util.EmptyStackException;
 import java.util.List;

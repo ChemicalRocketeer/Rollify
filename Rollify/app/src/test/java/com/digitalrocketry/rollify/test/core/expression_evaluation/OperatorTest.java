@@ -1,6 +1,6 @@
 package com.digitalrocketry.rollify.test.core.expression_evaluation;
 
-import com.digitalrocketry.rollify.core.expression_evaluation.Operator;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Operator;
 
 import org.junit.Test;
 
@@ -8,7 +8,7 @@ import java.util.Stack;
 
 import static org.junit.Assert.*;
 
-import static com.digitalrocketry.rollify.core.expression_evaluation.Operator.*;
+import static com.digitalrocketry.rollify.core.expression_evaluation.tokens.Operator.*;
 
 /**
  * Created by David Aaron Suddjian on 9/7/2015.

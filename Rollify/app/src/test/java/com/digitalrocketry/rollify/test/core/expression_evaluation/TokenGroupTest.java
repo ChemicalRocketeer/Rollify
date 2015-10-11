@@ -1,10 +1,9 @@
 package com.digitalrocketry.rollify.test.core.expression_evaluation;
 
-import com.digitalrocketry.rollify.core.expression_evaluation.DieToken;
-import com.digitalrocketry.rollify.core.expression_evaluation.NumberToken;
-import com.digitalrocketry.rollify.core.expression_evaluation.Operator;
-import com.digitalrocketry.rollify.core.expression_evaluation.Token;
-import com.digitalrocketry.rollify.core.expression_evaluation.TokenGroup;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.NumberToken;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Operator;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Token;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.TokenGroup;
 
 import org.junit.Test;
 

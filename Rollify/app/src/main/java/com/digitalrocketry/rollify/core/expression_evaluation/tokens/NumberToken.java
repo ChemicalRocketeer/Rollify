@@ -1,4 +1,4 @@
-package com.digitalrocketry.rollify.core.expression_evaluation;
+package com.digitalrocketry.rollify.core.expression_evaluation.tokens;
 
 import java.util.Stack;
 

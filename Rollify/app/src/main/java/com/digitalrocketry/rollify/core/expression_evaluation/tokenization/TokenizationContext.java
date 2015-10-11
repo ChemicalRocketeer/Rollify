@@ -1,6 +1,9 @@
-package com.digitalrocketry.rollify.core.expression_evaluation;
+package com.digitalrocketry.rollify.core.expression_evaluation.tokenization;
 
-import java.util.Collections;
+import com.digitalrocketry.rollify.core.expression_evaluation.InvalidExpressionException;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Operator;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Token;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;

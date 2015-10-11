@@ -1,4 +1,9 @@
-package com.digitalrocketry.rollify.core.expression_evaluation;
+package com.digitalrocketry.rollify.core.expression_evaluation.tokenization;
+
+import com.digitalrocketry.rollify.core.expression_evaluation.ExpressionUtils;
+import com.digitalrocketry.rollify.core.expression_evaluation.InvalidExpressionException;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.DieToken;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Token;
 
 /**
  * Created by David Aaron Suddjian on 9/8/2015.
