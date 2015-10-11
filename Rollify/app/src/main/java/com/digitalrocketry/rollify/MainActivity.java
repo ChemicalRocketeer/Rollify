@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements EvaluationTask.Li
 
     @Override
     public void onEvaluationTaskBegin(EvaluationTask task) {
-        calcDisplay.setDisplayText("evaluating...");
+        //calcDisplay.setDisplayText("evaluating...");
     }
 
     @Override
