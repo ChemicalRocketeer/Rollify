@@ -1,0 +1,436 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="com.digitalrocketry.rollify.NumpadFragment">
+
+    <android.support.v7.widget.GridLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:columnCount="5"
+        app:rowCount="7"
+        app:useDefaultMargins="false"
+        app:alignmentMode="alignBounds"
+        app:rowOrderPreserved="true">
+
+        <Button
+            style="@style/CalcButtonGrid"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            app:layout_row="0"
+            app:layout_column="0"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="D"
+            android:id="@+id/calcButtonAdvD"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcAdvancedButtonPressed" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            app:layout_row="1"
+            app:layout_column="0"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="H"
+            android:id="@+id/calcButtonAdvH"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcAdvancedButtonPressed" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            app:layout_row="2"
+            app:layout_column="0"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="L"
+            android:id="@+id/calcButtonAdvL"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcAdvancedButtonPressed" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            app:layout_row="3"
+            app:layout_column="0"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="F"
+            android:id="@+id/calcButtonAdvF"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcAdvancedButtonPressed" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="7"
+            android:id="@+id/calcButton7"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            style="@style/CalcButtonGrid"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcNumpadButtonPressed"
+            app:layout_row="0"
+            app:layout_column="1" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="8"
+            android:id="@+id/calcButton8"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcNumpadButtonPressed"
+            app:layout_row="0"
+            app:layout_column="2" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="9"
+            android:id="@+id/calcButton9"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcNumpadButtonPressed"
+            app:layout_row="0"
+            app:layout_column="3" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="4"
+            android:id="@+id/calcButton4"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcNumpadButtonPressed"
+            app:layout_row="1"
+            app:layout_column="1" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="5"
+            android:id="@+id/calcButton5"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcNumpadButtonPressed"
+            app:layout_row="1"
+            app:layout_column="2" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="6"
+            android:id="@+id/calcButton6"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcNumpadButtonPressed"
+            app:layout_row="1"
+            app:layout_column="3" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="1"
+            android:id="@+id/calcButton1"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcNumpadButtonPressed"
+            app:layout_row="2"
+            app:layout_column="1" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="2"
+            android:id="@+id/calcButton2"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcNumpadButtonPressed"
+            app:layout_row="2"
+            app:layout_column="2" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="3"
+            android:id="@+id/calcButton3"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcNumpadButtonPressed"
+            app:layout_row="2"
+            app:layout_column="3" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="0"
+            android:id="@+id/calcButton0"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcNumpadButtonPressed"
+            app:layout_row="3"
+            app:layout_column="1" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="("
+            android:id="@+id/calcButtonOpenParen"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcNumpadButtonPressed"
+            app:layout_row="3"
+            app:layout_column="2" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text=")"
+            android:id="@+id/calcButtonCloseParen"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcNumpadButtonPressed"
+            app:layout_row="3"
+            app:layout_column="3" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="+"
+            android:id="@+id/calcButtonAdd"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcOperatorButtonPressed"
+            app:layout_row="0"
+            app:layout_column="4"
+            android:textSize="@dimen/calcOperatorButtonTextSize"
+            android:background="@color/operatorBackground" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="-"
+            android:id="@+id/calcButtonSub"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcOperatorButtonPressed"
+            app:layout_row="1"
+            app:layout_column="4"
+            android:textSize="@dimen/calcOperatorButtonTextSize"
+            android:background="@color/operatorBackground" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="×"
+            android:id="@+id/calcButtonMul"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcOperatorButtonPressed"
+            app:layout_row="2"
+            app:layout_column="4"
+            android:textSize="@dimen/calcOperatorButtonTextSize"
+            android:background="@color/operatorBackground" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="÷"
+            android:id="@+id/calcButtonDiv"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcOperatorButtonPressed"
+            app:layout_row="3"
+            app:layout_column="4"
+            android:textSize="@dimen/calcOperatorButtonTextSize"
+            android:background="@color/operatorBackground" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            app:layout_row="4"
+            app:layout_column="4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="="
+            android:id="@+id/calcButtonEquals"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcEqualsButtonPressed"
+            app:layout_rowSpan="2"
+            android:nestedScrollingEnabled="true"
+            android:textSize="@dimen/calcEqualsButtonTextSize"
+            android:background="@color/operatorBackground" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="d2"
+            android:id="@+id/calcButtonD2"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcDButtonPressed"
+            app:layout_column="0"
+            app:layout_row="4" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="d4"
+            android:id="@+id/calcButtonD4"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcDButtonPressed"
+            app:layout_column="1"
+            app:layout_row="4" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="d6"
+            android:id="@+id/calcButtonD6"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcDButtonPressed"
+            app:layout_column="2"
+            app:layout_row="4" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="d8"
+            android:id="@+id/calcButtonD8"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcDButtonPressed"
+            app:layout_column="3"
+            app:layout_row="4" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="d10"
+            android:id="@+id/calcButtonD10"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcDButtonPressed"
+            app:layout_column="0"
+            app:layout_row="5" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="d12"
+            android:id="@+id/calcButtonD12"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcDButtonPressed"
+            app:layout_column="1"
+            app:layout_row="5" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="d20"
+            android:id="@+id/calcButtonD20"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcDButtonPressed"
+            app:layout_column="2"
+            app:layout_row="5" />
+
+        <Button
+            style="@style/CalcButtonGrid"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="d%"
+            android:id="@+id/calcButtonD100"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:singleLine="false"
+            android:onClick="onCalcDButtonPressed"
+            app:layout_column="3"
+            app:layout_row="5" />
+
+    </android.support.v7.widget.GridLayout>
+
+</FrameLayout>
