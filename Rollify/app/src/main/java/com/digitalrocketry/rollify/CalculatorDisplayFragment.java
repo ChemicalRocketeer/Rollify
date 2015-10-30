@@ -59,4 +59,8 @@ public class CalculatorDisplayFragment extends Fragment {
         expressionEditor.getEditableText().delete(start, end);
         expressionEditor.setSelection(start, start);
     }
+
+    public void clearExpression() {
+        expressionEditor.getEditableText().clear();
+    }
 }

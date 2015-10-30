@@ -277,7 +277,8 @@
         android:onClick="onCalcOperatorButtonPressed"
         app:layout_row="0"
         app:layout_column="4"
-        android:textSize="@dimen/calcOperatorButtonTextSize" />
+        android:textSize="@dimen/calcOperatorButtonTextSize"
+        android:background="@color/operatorBackground" />
 
     <Button
         style="@style/CalcButtonGrid"
@@ -292,7 +293,8 @@
         android:onClick="onCalcOperatorButtonPressed"
         app:layout_row="1"
         app:layout_column="4"
-        android:textSize="@dimen/calcOperatorButtonTextSize" />
+        android:textSize="@dimen/calcOperatorButtonTextSize"
+        android:background="@color/operatorBackground" />
 
     <Button
         style="@style/CalcButtonGrid"
@@ -307,7 +309,8 @@
         android:onClick="onCalcOperatorButtonPressed"
         app:layout_row="2"
         app:layout_column="4"
-        android:textSize="@dimen/calcOperatorButtonTextSize" />
+        android:textSize="@dimen/calcOperatorButtonTextSize"
+        android:background="@color/operatorBackground" />
 
     <Button
         style="@style/CalcButtonGrid"
@@ -322,7 +325,8 @@
         android:onClick="onCalcOperatorButtonPressed"
         app:layout_row="3"
         app:layout_column="4"
-        android:textSize="@dimen/calcOperatorButtonTextSize" />
+        android:textSize="@dimen/calcOperatorButtonTextSize"
+        android:background="@color/operatorBackground" />
 
     <Button
         style="@style/CalcButtonGrid"
@@ -339,7 +343,8 @@
         android:onClick="onCalcEqualsButtonPressed"
         app:layout_rowSpan="2"
         android:nestedScrollingEnabled="true"
-        android:textSize="@dimen/calcEqualsButtonTextSize" />
+        android:textSize="@dimen/calcEqualsButtonTextSize"
+        android:background="@color/operatorBackground" />
 
     <Button
         style="@style/CalcButtonGrid"

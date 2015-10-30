@@ -2,6 +2,10 @@ package com.digitalrocketry.rollify;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.digitalrocketry.rollify.tasks.EvaluationTask;
@@ -48,6 +52,37 @@ public class MainActivity extends AppCompatActivity implements EvaluationTask.Li
         entryButtonMap.put(R.id.calcButtonD20, "d20");
         entryButtonMap.put(R.id.calcButtonD100, "d100");
         calcDisplay = (CalculatorDisplayFragment) getFragmentManager().findFragmentById(R.id.calcDisplayFragment);
+    }
+
+    @Override
+     public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_backspace:
+                Log.i("Rollify menu", "backspace pressed");
+                calcDisplay.backspaceAtCursor();
+                return true;
+            case R.id.add_formula:
+                Log.i("Rollify menu", "add formula pressed");
+                return true;
+            case R.id.action_clear_expression:
+                Log.i("Rollify menu", "action settings pressed");
+                calcDisplay.clearExpression();
+                return true;
+            case R.id.action_settings:
+                Log.i("Rollify menu", "action settings pressed");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void evaluateExpressionAndDisplay() {

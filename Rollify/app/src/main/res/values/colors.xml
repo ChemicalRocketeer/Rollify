@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="numpadBackground" type="color">#ff9d2717</item>
+    <item name="numpadBackground" type="color">#c2311d</item>
+    <item name="operatorBackground" type="color">#7b1608</item>
 </resources>
