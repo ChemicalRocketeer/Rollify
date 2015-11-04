@@ -5,37 +5,48 @@
     android:orientation="vertical"
     tools:context="com.digitalrocketry.rollify.MainActivity">
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:elevation="6dp"
-    android:id="@+id/calcDisplayElevation">
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/calcDisplayContainer"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin">
+        android:elevation="6dp"
+        android:id="@+id/calcDisplayElevation">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/calcDisplayContainer"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin">
+
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:name="com.digitalrocketry.rollify.CalculatorDisplayFragment"
+                android:id="@+id/calcDisplayFragment"
+                android:layout_gravity="right"
+                tools:layout="@layout/fragment_calculator_display" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <fragment
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:name="com.digitalrocketry.rollify.CalculatorDisplayFragment"
-            android:id="@+id/calcDisplayFragment"
+            android:layout_height="match_parent"
+            android:name="com.digitalrocketry.rollify.NumpadFragment"
+            android:id="@+id/calcNumpadFragment"
             android:layout_gravity="right"
-            tools:layout="@layout/fragment_calculator_display" />
+            tools:layout="@layout/fragment_numpad" />
 
+        <android.support.v4.view.ViewPager
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/formula_view_pager" />
     </RelativeLayout>
-</RelativeLayout>
-
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.digitalrocketry.rollify.NumpadFragment"
-        android:id="@+id/calcNumpadFragment"
-        android:layout_gravity="right"
-        tools:layout="@layout/fragment_numpad" />
 
 </LinearLayout>

@@ -1,5 +1,7 @@
 package com.digitalrocketry.rollify;
 
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +18,8 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity implements EvaluationTask.Listener {
 
     CalculatorDisplayFragment calcDisplay;
-    Map<Integer, String> entryButtonMap;
+    Map<Integer, String> entryButtonMap; // map keypad buttons to their expression text values
+    private ViewPager formulaListPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,27 @@ public class MainActivity extends AppCompatActivity implements EvaluationTask.Li
         entryButtonMap.put(R.id.calcButtonD12, "d12");
         entryButtonMap.put(R.id.calcButtonD20, "d20");
         entryButtonMap.put(R.id.calcButtonD100, "d100");
+
         calcDisplay = (CalculatorDisplayFragment) getFragmentManager().findFragmentById(R.id.calcDisplayFragment);
+
+        formulaListPager = (ViewPager) findViewById(R.id.formula_view_pager);
+        PagerAdapter formulaListPagerAdapter =
+                new FormulaListPagerAdapter(getSupportFragmentManager(),
+                                            new NumpadFragment(),
+                                            new FormulaListFragment());
+        formulaListPager.setAdapter(formulaListPagerAdapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (formulaListPager.getCurrentItem() == 0) {
+            // If the user is currently looking at the first step, allow the system to handle the
+            // Back button. This calls finish() on this activity and pops the back stack.
+            super.onBackPressed();
+        } else {
+            // Otherwise, select the previous step.
+            formulaListPager.setCurrentItem(formulaListPager.getCurrentItem() - 1);
+        }
     }
 
     @Override
