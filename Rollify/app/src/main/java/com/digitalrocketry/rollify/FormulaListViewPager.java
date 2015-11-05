@@ -25,6 +25,9 @@ import android.view.ViewGroup;
 
 public class FormulaListViewPager extends ViewPager {
 
+    // percent of screen width for list to take up
+    public static final float LIST_PAGE_WIDTH = .81f;
+
     private final PagerAdapter mStaticPagerAdapter = new PagerAdapter() {
         @Override
         public int getCount() {
@@ -48,7 +51,7 @@ public class FormulaListViewPager extends ViewPager {
 
         @Override
         public float getPageWidth(int position) {
-            return position == 1 ? 7.0f / 9.0f : 1.0f;
+            return position == 1 ? LIST_PAGE_WIDTH : 1.0f;
         }
     };
 

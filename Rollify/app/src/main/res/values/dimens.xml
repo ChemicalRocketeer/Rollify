@@ -7,5 +7,5 @@
     <dimen name="calcButtonTextSize">24dp</dimen>
     <dimen name="calcOperatorButtonTextSize">30dp</dimen>
     <dimen name="calcEqualsButtonTextSize">36dp</dimen>
-    <dimen name="padPageMargin">25dp</dimen>
+    <dimen name="padPageMargin">16dp</dimen>
 </resources>
