@@ -10,6 +10,9 @@ import com.activeandroid.annotation.Table;
 @Table(name = "Formulas")
 public class Formula extends Model {
 
+    @Column(name = "ID")
+    public long id;
+
     @Column(name = "Name")
     public String name;
 
@@ -22,16 +25,16 @@ public class Formula extends Model {
     @Column(name = "Uses")
     public int uses;
 
-    public Formula(String name, String expression) {
-        this(name, expression, System.currentTimeMillis(), 0);
-    }
-
     public Formula(String name, String expression, long creationTime, int uses) {
         super();
         this.name = name;
         this.expression = expression;
         this.creationTime = creationTime;
         this.uses = uses;
+    }
+
+    public Formula(String name, String expression) {
+        this(name, expression, System.currentTimeMillis(), 0);
     }
 
     public Formula() {
