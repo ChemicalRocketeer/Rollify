@@ -2,5 +2,6 @@
     <string name="app_name">Rollify</string>
     <string name="title_activity_main">Rollify</string>
     <string name="action_settings">Settings</string>
+    <string name="db_filename">rollify.db</string>
     <string name="add_formula">M+</string>
 </resources>
