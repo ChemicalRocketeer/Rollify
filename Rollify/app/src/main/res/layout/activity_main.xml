@@ -8,8 +8,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="6dp"
-        android:id="@+id/calcDisplayElevation">
+        android:elevation="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -30,23 +29,36 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <RelativeLayout
+    <com.digitalrocketry.rollify.FormulaListViewPager
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/formula_view_pager" >
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:name="com.digitalrocketry.rollify.NumpadFragment"
+                android:id="@+id/calcNumpadFragment"
+                android:layout_gravity="right"
+                tools:layout="@layout/fragment_numpad"
+                android:layout_marginRight="@dimen/padPageMargin" />
+
+        </LinearLayout>
 
         <fragment
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:name="com.digitalrocketry.rollify.NumpadFragment"
-            android:id="@+id/calcNumpadFragment"
+            android:name="com.digitalrocketry.rollify.FormulaListFragment"
+            android:id="@+id/calcFormulaListFragment"
             android:layout_gravity="right"
-            tools:layout="@layout/fragment_numpad" />
-
-        <android.support.v4.view.ViewPager
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/formula_view_pager" />
-    </RelativeLayout>
+            tools:layout="@layout/fragment_formula_list" />
+    </com.digitalrocketry.rollify.FormulaListViewPager>
 
 </LinearLayout>
