@@ -10,22 +10,16 @@ import java.util.concurrent.TimeUnit;
 /**
  * The database model for a Formula
  */
-@Table(name = "Formulas")
-public class Formula extends Model {
+public class Formula {
 
-    @Column(name = "ID")
     public long id;
 
-    @Column(name = "Name")
     public String name;
 
-    @Column(name = "Expression")
     public String expression;
 
-    @Column(name = "CreationTime")
     public long creationTime;
 
-    @Column(name = "Uses")
     public int uses;
 
     public Formula(String name, String expression, long creationTime, int uses) {
