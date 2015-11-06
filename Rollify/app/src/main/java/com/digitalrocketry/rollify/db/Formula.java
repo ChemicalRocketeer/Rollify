@@ -4,6 +4,7 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
+import java.util.Comparator;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -54,4 +55,23 @@ public class Formula extends Model {
         if (time == 0) time = 1; // prevent any potential division by 0.
         return uses / time;
     }
+
+
+    public static final Comparator<Formula> COMPARE_BY_NAME = new Comparator<Formula>() {
+        public int compare(Formula a, Formula b) {
+            return a.name.compareTo(b.name);
+        }
+    };
+
+    public static final Comparator<Formula> COMPARE_BY_USE_RATE = new Comparator<Formula>() {
+        public int compare(Formula a, Formula b) {
+            return Float.compare(a.getUseRate(), b.getUseRate());
+        }
+    };
+
+    public static final Comparator<Formula> COMPARE_BY_CREATE_TIME = new Comparator<Formula>() {
+        public int compare(Formula a, Formula b) {
+            return Long.compare(a.creationTime, b.creationTime);
+        }
+    };
 }
