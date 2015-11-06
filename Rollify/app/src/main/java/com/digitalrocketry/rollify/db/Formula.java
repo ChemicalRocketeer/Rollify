@@ -1,11 +1,6 @@
 package com.digitalrocketry.rollify.db;
 
-import com.activeandroid.Model;
-import com.activeandroid.annotation.Column;
-import com.activeandroid.annotation.Table;
-
 import java.util.Comparator;
-import java.util.concurrent.TimeUnit;
 
 /**
  * The database model for a Formula
