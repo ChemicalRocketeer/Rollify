@@ -4,6 +4,8 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * The database model for a Formula
  */
@@ -39,5 +41,17 @@ public class Formula extends Model {
 
     public Formula() {
         super();
+    }
+
+    private static final long MILLIS_PER_HOUR = 1000 * 60 * 60;
+
+    /**
+     * @return the use rate per hour
+     */
+    public float getUseRate() {
+        // hours this formula has existed
+        long time = (System.currentTimeMillis() - creationTime) / MILLIS_PER_HOUR;
+        if (time == 0) time = 1; // prevent any potential division by 0.
+        return uses / time;
     }
 }
