@@ -10,6 +10,9 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.digitalrocketry.rollify.db.Formula;
+import com.orm.query.Select;
+
+import java.util.List;
 
 
 /**
@@ -27,17 +30,13 @@ public class FormulaListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         View layout = inflater.inflate(R.layout.fragment_formula_list, container, false);
         ListView list = (ListView) layout.findViewById(R.id.formulaListView);
-        adapter = new FormulaAdapter(getContext(), new Formula[] {
-                new Formula("Formula 1", "2d6+5d4+2", 0, 5),
-                new Formula("Formula 2", "d4d12", 0, 3),
-                new Formula("Formula 3", "3(2d10)", 0, 1),
-        });
+        List<Formula> fList = Select.from(Formula.class).list();
+        adapter = new FormulaAdapter(getContext(), fList.toArray(new Formula[fList.size()]));
         adapter.sort(Formula.COMPARE_BY_NAME);
         list.setAdapter(adapter);
         return layout;
     }
-
-
 }

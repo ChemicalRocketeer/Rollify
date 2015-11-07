@@ -1,20 +1,18 @@
 package com.digitalrocketry.rollify.db;
 
+import com.orm.SugarRecord;
+
 import java.util.Comparator;
 
 /**
  * The database model for a Formula
  */
-public class Formula {
+public class Formula extends SugarRecord<Formula> {
 
     public long id;
-
     public String name;
-
     public String expression;
-
     public long creationTime;
-
     public int uses;
 
     public Formula(String name, String expression, long creationTime, int uses) {
@@ -44,7 +42,6 @@ public class Formula {
         if (time == 0) time = 1; // prevent any potential division by 0.
         return uses / time;
     }
-
 
     public static final Comparator<Formula> COMPARE_BY_NAME = new Comparator<Formula>() {
         public int compare(Formula a, Formula b) {
