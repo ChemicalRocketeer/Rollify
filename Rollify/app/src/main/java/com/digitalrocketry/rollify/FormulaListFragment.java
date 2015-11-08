@@ -12,11 +12,12 @@ import android.widget.ListView;
 import com.digitalrocketry.rollify.db.Formula;
 import com.orm.query.Select;
 
+import java.util.Comparator;
 import java.util.List;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * The fragment containing the Formula List
  */
 public class FormulaListFragment extends Fragment {
 
@@ -33,10 +34,26 @@ public class FormulaListFragment extends Fragment {
 
         View layout = inflater.inflate(R.layout.fragment_formula_list, container, false);
         ListView list = (ListView) layout.findViewById(R.id.formulaListView);
-        List<Formula> fList = Select.from(Formula.class).list();
-        adapter = new FormulaAdapter(getContext(), fList.toArray(new Formula[fList.size()]));
-        adapter.sort(Formula.COMPARE_BY_NAME);
+        adapter = new FormulaAdapter(getContext(), Select.from(Formula.class), Formula.COMPARE_BY_NAME);
         list.setAdapter(adapter);
+        if (adapter.isEmpty()) {
+            new Formula("Test Formula 1", "2d12+d4d6").save();
+            new Formula("Test Formula 2", "6(d20)").save();
+            new Formula("Test Formula 3", "8 + 200d2").save();
+            updateFormulaView();
+        }
         return layout;
+    }
+
+    public void updateFormulaView() {
+        adapter.notifyDataSetChanged();
+    }
+
+    public void setSortingMode(Comparator<Formula> comparator) {
+        adapter.setComparator(comparator);
+    }
+
+    public void setFormulaQuery(Select<Formula> selector) {
+        adapter.setQuery(selector);
     }
 }
