@@ -58,7 +58,7 @@ public class FormulaAdapter extends BaseAdapter{
         if (convertView == null) {
             v = LayoutInflater.from(context).inflate(R.layout.formula_list_item, null);
         }
-        String name = getItem(position).name;
+        String name = getItem(position).getName();
         ((TextView) v.findViewById(R.id.formulaName)).setText(name);
         return v;
     }
@@ -75,7 +75,7 @@ public class FormulaAdapter extends BaseAdapter{
 
     @Override
     public long getItemId(int position) {
-        return getItem(position).id;
+        return getItem(position).getId();
     }
 
     @Override
