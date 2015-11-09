@@ -1,7 +1,5 @@
 package com.digitalrocketry.rollify;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -57,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements EvaluationTask.Li
         entryButtonMap.put(R.id.calcButtonD100, "d100");
 
         calcDisplay = (CalculatorDisplayFragment) getFragmentManager().findFragmentById(R.id.calcDisplayFragment);
+        FormulaListFragment fListFrag = (FormulaListFragment) getSupportFragmentManager().findFragmentById(R.id.calcFormulaListFragment);
+        fListFrag.setFormulaUser(calcDisplay);
 
         formulaListPager = (ViewPager) findViewById(R.id.formula_view_pager);
     }

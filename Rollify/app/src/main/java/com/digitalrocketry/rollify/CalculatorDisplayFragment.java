@@ -10,7 +10,9 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class CalculatorDisplayFragment extends Fragment {
+import com.digitalrocketry.rollify.db.Formula;
+
+public class CalculatorDisplayFragment extends Fragment implements FormulaListFragment.FormulaUser {
 
     TextView displayText;
     EditText expressionEditor;
@@ -62,5 +64,10 @@ public class CalculatorDisplayFragment extends Fragment {
 
     public void clearExpression() {
         expressionEditor.getEditableText().clear();
+    }
+
+    @Override
+    public void useFormula(Formula f) {
+        insertTextAtCursor(f.getExpression());
     }
 }
