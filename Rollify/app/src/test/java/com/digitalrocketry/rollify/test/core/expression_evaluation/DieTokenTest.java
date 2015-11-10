@@ -1,7 +1,7 @@
 package com.digitalrocketry.rollify.test.core.expression_evaluation;
 
 import com.digitalrocketry.rollify.core.expression_evaluation.tokens.DieToken;
-import com.digitalrocketry.rollify.core.expression_evaluation.tokens.NumberToken;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.IntegerToken;
 import com.digitalrocketry.rollify.core.expression_evaluation.RandomProvider;
 import com.digitalrocketry.rollify.core.expression_evaluation.ExpressionUtils;
 
@@ -32,27 +32,27 @@ public class DieTokenTest {
 
     @Test
     public void testIsNumber() throws Exception {
-        DieToken toke = new DieToken(new NumberToken(1), 6);
+        DieToken toke = new DieToken(new IntegerToken(1), 6);
         assertTrue(toke.isNumber());
     }
 
     @Test
     public void testOperate() throws Exception {
         ExpressionUtils.RAND = TestingUtils.MIN;
-        DieToken toke = new DieToken(new NumberToken(6), 6);
+        DieToken toke = new DieToken(new IntegerToken(6), 6);
         Stack<Long> stack = new Stack<>();
         toke.operate(stack);
         assertEquals(6, (long) stack.peek());
         assertEquals(1, stack.size());
 
         ExpressionUtils.RAND = TestingUtils.MAX;
-        toke = new DieToken(new NumberToken(2), 6);
+        toke = new DieToken(new IntegerToken(2), 6);
         stack = new Stack<>();
         toke.operate(stack);
         assertEquals(12, (long) stack.peek());
         assertEquals(1, stack.size());
 
-        toke = new DieToken(new DieToken(new NumberToken(1), 10), 10);
+        toke = new DieToken(new DieToken(new IntegerToken(1), 10), 10);
         stack = new Stack<>();
         toke.operate(stack);
         assertEquals(100, (long) stack.peek());
@@ -61,7 +61,7 @@ public class DieTokenTest {
 
     @Test
     public void testToString() throws Exception {
-        DieToken toke = new DieToken(new NumberToken(5), 20);
+        DieToken toke = new DieToken(new IntegerToken(5), 20);
         assertEquals("5d20", toke.toString());
     }
 }

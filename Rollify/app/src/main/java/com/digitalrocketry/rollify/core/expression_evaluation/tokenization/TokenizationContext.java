@@ -11,6 +11,10 @@ import java.util.Stack;
 
 /**
  * Created by David Aaron Suddjian on 9/2/2015.
+ *
+ * The TokenizationContext converts an infix dice expression into a postfix
+ * list of tokens. It does this by using a shunting-yard algorithm, modified so that it works with random numbers.
+ * and interacts with Tokenizers which convert individual pieces from a StringScanner into Token objects.
  */
 public class TokenizationContext {
 
@@ -42,7 +46,7 @@ public class TokenizationContext {
         this.finished = false;
     }
 
-    public List<Token> tokenize() {
+    public List<Token> tokenize() throws InvalidExpressionException {
         scanner.skipWhitespace();
         this.finished = false;
         while (scanner.hasNext() && !finished) {

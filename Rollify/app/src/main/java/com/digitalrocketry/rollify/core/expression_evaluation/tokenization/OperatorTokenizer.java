@@ -1,15 +1,18 @@
 package com.digitalrocketry.rollify.core.expression_evaluation.tokenization;
 
 import com.digitalrocketry.rollify.core.expression_evaluation.InvalidExpressionException;
-import com.digitalrocketry.rollify.core.expression_evaluation.tokens.NumberToken;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.IntegerToken;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Operator;
 
 /**
  * Created by David Aaron Suddjian on 9/8/2015.
+ *
+ * Tokenizes operators into OperatorTokens
  */
 public class OperatorTokenizer implements Tokenizer {
     @Override
-    public boolean tryTokenize(TokenizationContext context, StringScanner sc) {
+    public boolean tryTokenize(TokenizationContext context, StringScanner sc)
+            throws InvalidExpressionException {
         String symbol = String.valueOf(sc.next());
         if (Operator.isDefined(symbol)) {
             Operator op = Operator.get(symbol);
@@ -28,7 +31,7 @@ public class OperatorTokenizer implements Tokenizer {
                     // if the next token is something other than a number then we want to commit a -1
                     num = 1;
                 }
-                context.commitToken(new NumberToken(-num));
+                context.commitToken(new IntegerToken(-num));
             } else {
                 throw new InvalidExpressionException("misplaced operator: " + op);
             }

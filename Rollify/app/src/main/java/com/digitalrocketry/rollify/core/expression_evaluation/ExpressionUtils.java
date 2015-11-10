@@ -1,34 +1,51 @@
 package com.digitalrocketry.rollify.core.expression_evaluation;
 
 import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.TokenizationContext;
-import com.digitalrocketry.rollify.core.expression_evaluation.tokens.NumberToken;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.IntegerToken;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Token;
 
 import java.util.List;
 
 /**
  * Created by David Aaron Suddjian on 9/2/2015.
+ *
+ * Utilities for evaluation and tokenization classes.
  */
 public class ExpressionUtils {
 
     // this isn't final because tests need to be able to change it
     public static RandomProvider RAND = new DefaultRandomProvider();
 
-    public static final long MAX_EXPRESSION_ITERATIONS = 1000000; // the max number of times we want to repeatedly add a TokenGroup/DieDef
-    public static final long MAX_DIE_TYPE = 1000000000; // the largest die type we care to allow
+    // the max number of times we want to repeatedly perform operations like additions and expression evaluations.
+    // Ultimately it is up to individual classes to enforce this.
+    public static final long MAX_OPERATION_ITERATIONS = 1000000;
 
-    public static final Token findMultiplierToken(TokenizationContext context) {
+    /**
+     * If your token can take a coefficient (e.g. 3x where 3 is the coefficient) then this method
+     * will look for a suitable token, and pop it out of the context and return it for you to use.
+     * If there is no suitable token (if the last token was not a number) then it will return an
+     * IntegerToken of value 1, because multiplying by 1 has no effect.
+     * This method does not return null.
+     *
+     * @param context the TokenizationContext to find a coefficient from
+     * @return the coefficient, or an IntegerToken of value 1
+     */
+    public static Token findCoefficientToken(TokenizationContext context) {
         if (context.lastTokenWasnumber()) {
             Token last = context.getLastToken();
             List<Token> tokens = context.getOutputTokens();
             tokens.remove(tokens.size() - 1);
             return last;
         } else {
-            return new NumberToken(1);
+            return new IntegerToken(1);
         }
     }
 
-    public static boolean containsVariable(List<Token> tokens) {
+    /**
+     * @param tokens a list of Tokens
+     * @return true if one of the tokens is a variable that can have a random value (like a DieToken)
+     */
+    public static boolean containsRandomVariable(List<Token> tokens) {
         for (Token toke : tokens) {
             if (toke.isVariable()) {
                 return true;

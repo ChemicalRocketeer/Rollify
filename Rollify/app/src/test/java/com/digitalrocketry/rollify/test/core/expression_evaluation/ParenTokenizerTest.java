@@ -1,6 +1,6 @@
 package com.digitalrocketry.rollify.test.core.expression_evaluation;
 
-import com.digitalrocketry.rollify.core.expression_evaluation.tokens.NumberToken;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.IntegerToken;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.ParenTokenizer;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.StringScanner;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.TokenizationContext;
@@ -32,7 +32,7 @@ public class ParenTokenizerTest {
         StringScanner steve = new StringScanner("()aaaaaaaaa");
         Tokenizer toke = new ParenTokenizer();
         TokenizationContext context = new TokenizationContext(steve, Arrays.asList(toke));
-        context.commitToken(new NumberToken(200));
+        context.commitToken(new IntegerToken(200));
         toke.tryTokenize(context, steve);
         assertEquals("200()", context.getLastToken().toString());
         assertEquals(2, steve.getCursor());
@@ -43,7 +43,7 @@ public class ParenTokenizerTest {
         StringScanner steve = new StringScanner("(())aaaaaaaaa");
         Tokenizer toke = new ParenTokenizer();
         TokenizationContext context = new TokenizationContext(steve, Arrays.asList(toke));
-        context.commitToken(new NumberToken(2));
+        context.commitToken(new IntegerToken(2));
         toke.tryTokenize(context, steve);
         assertEquals("2(1())", context.getLastToken().toString());
         assertEquals(4, steve.getCursor());

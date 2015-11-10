@@ -1,6 +1,6 @@
 package com.digitalrocketry.rollify.test.core.expression_evaluation;
 
-import com.digitalrocketry.rollify.core.expression_evaluation.tokens.NumberToken;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.IntegerToken;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Operator;
 import com.digitalrocketry.rollify.core.expression_evaluation.RandomProvider;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.StringScanner;
@@ -27,7 +27,7 @@ public class TestingUtils {
 
     /**
      * Always consumes a token regardless of the input provided. If the last token consumed was a number,
-     * commits Operator.ADD, else commits a NumberToken(1);
+     * commits Operator.ADD, else commits a IntegerToken(1);
      */
     public static final Tokenizer ONE_OR_ADD = new Tokenizer() {
         @Override
@@ -36,7 +36,7 @@ public class TestingUtils {
             if (context.lastTokenWasnumber()) {
                 context.commitOperator(Operator.ADD);
             } else {
-                context.commitToken(new NumberToken(1));
+                context.commitToken(new IntegerToken(1));
             }
             return true;
         }
