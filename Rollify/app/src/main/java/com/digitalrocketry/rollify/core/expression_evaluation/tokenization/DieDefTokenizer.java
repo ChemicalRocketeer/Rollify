@@ -24,7 +24,7 @@ public class DieDefTokenizer implements Tokenizer {
                 throw new InvalidExpressionException("No die type specified");
             long dieType = sc.nextLong();
             Token dieCount = ExpressionUtils.findCoefficientToken(context);
-            context.commitToken(new DieToken(dieCount, dieType));
+            context.pushToOutput(new DieToken(dieCount, dieType));
             return true;
         } else {
             return false;

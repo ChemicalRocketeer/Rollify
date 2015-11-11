@@ -48,7 +48,7 @@ public class StringScanner {
      * @return true if there is a digit left to read
      */
     public boolean hasNextDigit() {
-        return hasNext() && Character.isDigit(next());
+        return hasNext() && Character.isDigit(peek());
     }
 
     /**

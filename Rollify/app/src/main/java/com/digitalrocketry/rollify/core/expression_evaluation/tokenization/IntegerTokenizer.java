@@ -13,7 +13,7 @@ public class IntegerTokenizer implements Tokenizer {
     public boolean tryTokenize(TokenizationContext context, StringScanner sc)
             throws InvalidExpressionException {
         if (Character.isDigit(sc.peek())) {
-            context.commitToken(new IntegerToken(sc.nextLong()));
+            context.pushToOutput(new IntegerToken(sc.nextLong()));
             return true;
         } else {
             return false;

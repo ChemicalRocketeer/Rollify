@@ -33,10 +33,10 @@ public class TestingUtils {
         @Override
         public boolean tryTokenize(TokenizationContext context, StringScanner sc) {
             sc.next();
-            if (context.lastTokenWasnumber()) {
-                context.commitOperator(Operator.ADD);
+            if (context.lastTokenWasNumber()) {
+                context.pushToStack(Operator.ADD);
             } else {
-                context.commitToken(new IntegerToken(1));
+                context.pushToOutput(new IntegerToken(1));
             }
             return true;
         }

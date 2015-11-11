@@ -17,7 +17,9 @@ import java.util.Stack;
 /**
  * Created by David Aaron Suddjian on 9/2/2015.
  *
- * Evaluates a given
+ * Evaluates a given expression into a long value.
+ *
+ * An example expression might be: 1 + 2 - 3 * 4 / 2(2d6d20 + 12)
  */
 public class Evaluator {
 
@@ -27,7 +29,7 @@ public class Evaluator {
 
     public Result evaluate(String expression)
             throws  InvalidExpressionException {
-        TokenizationContext context = new TokenizationContext(new StringScanner(expression), tokenizers);
+        TokenizationContext context = new TokenizationContext(expression, tokenizers);
         return evaluate(context);
     }
 

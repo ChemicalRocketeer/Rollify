@@ -22,7 +22,7 @@ public class ExpressionUtilsTest {
     @Test
     public void testFindMultiplierToken() throws Exception {
         TokenizationContext context = new TokenizationContext(new StringScanner(""), new ArrayList<Tokenizer>());
-        context.commitToken(new IntegerToken(42));
+        context.pushToOutput(new IntegerToken(42));
         Token multiplier = ExpressionUtils.findCoefficientToken(context);
         assertEquals("42", multiplier.toString());
     }
@@ -37,7 +37,7 @@ public class ExpressionUtilsTest {
     @Test
     public void testFindMultiplierTokenWithNonNumber() throws Exception {
         TokenizationContext context = new TokenizationContext(new StringScanner(""), new ArrayList<Tokenizer>());
-        context.commitOperator(Operator.ADD);
+        context.pushToStack(Operator.ADD);
         Token multiplier = ExpressionUtils.findCoefficientToken(context);
         assertEquals("1", multiplier.toString());
     }

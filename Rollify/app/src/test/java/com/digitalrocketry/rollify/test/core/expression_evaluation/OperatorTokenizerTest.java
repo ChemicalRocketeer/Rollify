@@ -21,7 +21,7 @@ public class OperatorTokenizerTest {
     public void testTryTokenizeAdd() throws Exception {
         StringScanner scanner = new StringScanner("+xxx");
         TokenizationContext context = new TokenizationContext(new StringScanner(""), new ArrayList<Tokenizer>());
-        context.commitToken(new IntegerToken(1));
+        context.pushToOutput(new IntegerToken(1));
         new OperatorTokenizer().tryTokenize(context, scanner);
         assertEquals("+", context.getLastToken().toString());
         assertEquals(1, scanner.getCursor());
@@ -31,7 +31,7 @@ public class OperatorTokenizerTest {
     public void testTryTokenizeSub() throws Exception {
         StringScanner scanner = new StringScanner("-  xxx");
         TokenizationContext context = new TokenizationContext(new StringScanner(""), new ArrayList<Tokenizer>());
-        context.commitToken(new IntegerToken(1));
+        context.pushToOutput(new IntegerToken(1));
         new OperatorTokenizer().tryTokenize(context, scanner);
         assertEquals("-", context.getLastToken().toString());
         assertEquals(1, scanner.getCursor());
@@ -41,7 +41,7 @@ public class OperatorTokenizerTest {
     public void testTryTokenizeMul() throws Exception {
         StringScanner scanner = new StringScanner("*xxx");
         TokenizationContext context = new TokenizationContext(new StringScanner(""), new ArrayList<Tokenizer>());
-        context.commitToken(new IntegerToken(1));
+        context.pushToOutput(new IntegerToken(1));
         new OperatorTokenizer().tryTokenize(context, scanner);
         assertEquals("*", context.getLastToken().toString());
         assertEquals(1, scanner.getCursor());
@@ -51,7 +51,7 @@ public class OperatorTokenizerTest {
     public void testTryTokenizeDiv() throws Exception {
         StringScanner scanner = new StringScanner("/xxx");
         TokenizationContext context = new TokenizationContext(new StringScanner(""), new ArrayList<Tokenizer>());
-        context.commitToken(new IntegerToken(1));
+        context.pushToOutput(new IntegerToken(1));
         new OperatorTokenizer().tryTokenize(context, scanner);
         assertEquals("/", context.getLastToken().toString());
         assertEquals(1, scanner.getCursor());

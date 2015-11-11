@@ -34,7 +34,7 @@ public class DieDefTokenizerTest {
         DieDefTokenizer toke = new DieDefTokenizer();
         List<Tokenizer> tokenizerList = new ArrayList<>();
         TokenizationContext context = new TokenizationContext(new StringScanner(""), tokenizerList);
-        context.commitToken(new IntegerToken(10));
+        context.pushToOutput(new IntegerToken(10));
         StringScanner steve = new StringScanner("d20xxxxxx");
         toke.tryTokenize(context, steve);
         assertEquals("10d20", context.getLastToken().toString());
@@ -46,7 +46,7 @@ public class DieDefTokenizerTest {
         DieDefTokenizer toke = new DieDefTokenizer();
         List<Tokenizer> tokenizerList = new ArrayList<>();
         TokenizationContext context = new TokenizationContext(new StringScanner(""), tokenizerList);
-        context.commitToken(new IntegerToken(-10));
+        context.pushToOutput(new IntegerToken(-10));
         StringScanner steve = new StringScanner("d20xxxxxx");
         toke.tryTokenize(context, steve);
         assertEquals("-10d20", context.getLastToken().toString());

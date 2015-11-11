@@ -16,8 +16,8 @@ public class OperatorTokenizer implements Tokenizer {
         String symbol = String.valueOf(sc.next());
         if (Operator.isDefined(symbol)) {
             Operator op = Operator.get(symbol);
-            if (context.lastTokenWasnumber()) {
-                context.commitOperator(op);
+            if (context.lastTokenWasNumber()) {
+                context.pushToStack(op);
             } else if (op.equals(Operator.SUB)) {
                 // this token might be negation instead of a SUB operator
                 sc.skipWhitespace();
@@ -31,7 +31,7 @@ public class OperatorTokenizer implements Tokenizer {
                     // if the next token is something other than a number then we want to commit a -1
                     num = 1;
                 }
-                context.commitToken(new IntegerToken(-num));
+                context.pushToOutput(new IntegerToken(-num));
             } else {
                 throw new InvalidExpressionException("misplaced operator: " + op);
             }

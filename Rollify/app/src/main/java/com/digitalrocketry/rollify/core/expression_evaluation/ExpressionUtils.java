@@ -31,11 +31,8 @@ public class ExpressionUtils {
      * @return the coefficient, or an IntegerToken of value 1
      */
     public static Token findCoefficientToken(TokenizationContext context) {
-        if (context.lastTokenWasnumber()) {
-            Token last = context.getLastToken();
-            List<Token> tokens = context.getOutputTokens();
-            tokens.remove(tokens.size() - 1);
-            return last;
+        if (context.lastTokenWasNumber()) {
+            return context.popOutput();
         } else {
             return new IntegerToken(1);
         }
