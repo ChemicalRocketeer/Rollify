@@ -25,6 +25,11 @@ public class IntegerToken extends Token {
     }
 
     @Override
+    public TYPE getType() {
+        return TYPE.NUMBER;
+    }
+
+    @Override
     public String toString() {
         return String.valueOf(num);
     }

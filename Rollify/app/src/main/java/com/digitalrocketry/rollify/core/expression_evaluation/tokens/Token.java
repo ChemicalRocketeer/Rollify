@@ -18,6 +18,10 @@ import java.util.Stack;
  */
 public abstract class Token {
 
+    public enum TYPE {
+        NUMBER, OPERATOR, CONTROL
+    }
+
     /**
      * Manipulates the stack using whatever operations this token performs.
      *
@@ -30,6 +34,10 @@ public abstract class Token {
      */
     public boolean isNumber() {
         return false;
+    }
+
+    public TYPE getType() {
+        return TYPE.CONTROL;
     }
 
     /**
