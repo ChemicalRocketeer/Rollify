@@ -74,11 +74,6 @@ public abstract class Operator extends Token {
      */
     public abstract String getSymbol();
 
-    @Override
-    public TYPE getType() {
-        return TYPE.OPERATOR;
-    }
-
     /**
      * Performs the operation on the numbers in the stack
      *

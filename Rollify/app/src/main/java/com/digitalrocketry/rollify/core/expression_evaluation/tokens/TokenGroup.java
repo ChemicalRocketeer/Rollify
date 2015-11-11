@@ -60,11 +60,6 @@ public class TokenGroup extends Token {
         return true;
     }
 
-    @Override
-    public TYPE getType() {
-        return TYPE.NUMBER;
-    }
-
     /**
      * @return true if any part of this TokenGroup is random
      */

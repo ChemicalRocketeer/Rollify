@@ -97,9 +97,13 @@ public class TokenizationContext {
      * @param op the Operator
      */
     public void pushToStack(Operator op) {
-        float precedence = op.getPrecedence();
-        while (stack.size() > 0 && stack.peek().getPrecedence() >= precedence) {
-            output.add(stack.pop());
+        if (!op.isControl()) {
+            float precedence = op.getPrecedence();
+            while (stack.size() > 0
+                    && !stack.peek().isControl()
+                    && stack.peek().getPrecedence() >= precedence) {
+                output.add(stack.pop());
+            }
         }
         stack.push(op);
         lastToken = op;
@@ -154,6 +158,13 @@ public class TokenizationContext {
      */
     public boolean lastTokenWasNumber() {
         return lastToken != null && lastToken.isNumber();
+    }
+
+    /**
+     * @return whether the last token was a control token
+     */
+    public boolean lastTokenWasControl() {
+        return lastToken != null && lastToken.isControl();
     }
 
     /**

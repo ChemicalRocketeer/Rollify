@@ -29,11 +29,6 @@ public class DieToken extends Token {
     }
 
     @Override
-    public TYPE getType() {
-        return TYPE.NUMBER;
-    }
-
-    @Override
     public boolean isVariable() { return true; }
 
     /**
