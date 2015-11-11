@@ -7,15 +7,21 @@ import java.util.Stack;
 /**
  * Created by David Aaron Suddjian on 9/1/2015.
  *
- * Represents a distinct part of an expression. In 42+6, the tokens are 42, +, and 6.
+ * Represents a distinct unit of an expression.
+ * In 42+6, the tokens are 42, +, and 6.
+ * This expression in postfix notation is 42 6 +.
+ * The expression is evaluated in a stack machine starting with an empty stack.
+ * First, 42 places itself on the stack, then 6 places itself on the stack, then + pulls both
+ * of them off, adds them together, and pushes the result onto the stack. So the result is 48.
  *
- * Subclasses using randomness should use ExpressionUtils.RAND
+ * Subclasses using randomness should use ExpressionUtils.RAND, for testing purposes.
  */
 public abstract class Token {
 
     /**
-     * Manipulates the stack using whatever operations this token performs
-     * @param stack the stack to use
+     * Manipulates the stack using whatever operations this token performs.
+     *
+     * @param stack the stack of arguments to operate on
      */
     public abstract void operate(Stack<Long> stack) throws InvalidExpressionException;
 

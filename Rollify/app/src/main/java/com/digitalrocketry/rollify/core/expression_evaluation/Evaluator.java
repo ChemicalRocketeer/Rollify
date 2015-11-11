@@ -17,7 +17,13 @@ import java.util.Stack;
 /**
  * Created by David Aaron Suddjian on 9/2/2015.
  *
- * Evaluates a given expression into a long value.
+ * Evaluates a given expression into a Result.
+ *
+ * Expressions are expected to be in postfix notation. Behavior with expressions in other notations
+ * is undefined.
+ *
+ * If an invalid expression (or an invalid sequence of tokens) is supplied, an InvalidExpressionException
+ * will be thrown with details.
  *
  * An example expression might be: 1 + 2 - 3 * 4 / 2(2d6d20 + 12)
  */

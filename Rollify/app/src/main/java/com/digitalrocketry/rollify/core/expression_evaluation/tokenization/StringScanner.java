@@ -105,7 +105,6 @@ public class StringScanner {
     public long nextLong() throws InvalidExpressionException {
         BigInteger bint = nextBigInteger();
         if (bint.compareTo(MAX_LONG) > 0) {
-            // TODO: move this exception outside StringScanner. It doesn't make sense for StringScanner to know about invalid expressions.
             throw new InvalidExpressionException(bint.toString() + " is too large");
         }
         return bint.longValue();
