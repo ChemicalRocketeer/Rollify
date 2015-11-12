@@ -2,10 +2,11 @@ package com.digitalrocketry.rollify.core.expression_evaluation.tokenization;
 
 import com.digitalrocketry.rollify.core.expression_evaluation.ExpressionUtils;
 import com.digitalrocketry.rollify.core.expression_evaluation.InvalidExpressionException;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Operator;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Token;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokens.TokenGroup;
 
-import java.util.List;
+import java.util.LinkedList;
 import java.util.Stack;
 
 /**
@@ -17,30 +18,81 @@ import java.util.Stack;
  */
 public class ParenTokenizer implements Tokenizer {
 
-    // this works because all the nested parentheses will share the same ParenTokenizer instance
-    private int nestedParentheses = 0;
-
     @Override
     public boolean tryTokenize(TokenizationContext context, StringScanner sc)
             throws InvalidExpressionException {
         if (sc.peek() == '(') {
             sc.next();
+            /*
             nestedParentheses ++;
             List<Token> contents = new TokenizationContext(context).tokenize();
             Token multiplier = ExpressionUtils.findCoefficientToken(context);
             context.pushToOutput(new TokenGroup(multiplier, contents));
+            */
+
+            Token multiplier = ExpressionUtils.findCoefficientToken(context);
+            ParenControlToken parenToken = new ParenControlToken(multiplier);
+            context.pushToOutput(parenToken);
+            context.pushToStack(parenToken);
             return true;
-        } else if (contextIsInParentheses() && sc.peek() == ')') {
+        } else if (sc.peek() == ')') {
             sc.next();
-            context.finish();
-            nestedParentheses --;
+            LinkedList<Token> contents = new LinkedList<>();
+            while (!(context.peekOutput() instanceof ParenControlToken)) {
+                Token toke = context.popOutput();
+                if (toke == null) {
+                    throw new InvalidExpressionException("mismatched parentheses");
+                } else {
+                    contents.addFirst(toke);
+                }
+            }
+            context.popOutput(); // remove the paren token
+
+            while (!(context.peekStack() instanceof ParenControlToken)) {
+                Operator op = context.popStack();
+                if (op == null) {
+                    throw new InvalidExpressionException("mismatched parentheses");
+                } else {
+                    contents.addLast(op);
+                }
+            }
+            ParenControlToken parenToken = (ParenControlToken) context.popStack(); // remove paren token
+
+            context.pushToOutput(new TokenGroup(parenToken.coefficient, contents));
+            //context.finish();
+            //nestedParentheses --;
             return true;
         } else {
             return false;
         }
     }
 
-    private boolean contextIsInParentheses() {
-        return nestedParentheses > 0;
-    }
+    private static class ParenControlToken extends Operator {
+
+        Token coefficient;
+
+        public ParenControlToken(Token coefficient) {
+            this.coefficient = coefficient;
+        }
+
+        @Override
+        public boolean isControl() {
+            return true;
+        }
+
+        @Override
+        public float getPrecedence() {
+            return -1;
+        }
+
+        @Override
+        public String getSymbol() {
+            return "(";
+        }
+
+        @Override
+        public void operate(Stack<Long> stack) throws InvalidExpressionException {
+            throw new InvalidExpressionException("mismatched parentheses");
+        }
+    };
 }

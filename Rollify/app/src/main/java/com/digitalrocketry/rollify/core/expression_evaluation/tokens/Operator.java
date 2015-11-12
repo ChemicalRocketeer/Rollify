@@ -1,5 +1,7 @@
 package com.digitalrocketry.rollify.core.expression_evaluation.tokens;
 
+import com.digitalrocketry.rollify.core.expression_evaluation.InvalidExpressionException;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -80,7 +82,7 @@ public abstract class Operator extends Token {
      * @param stack the stack to use
      */
     @Override
-    public abstract void operate(Stack<Long> stack);
+    public abstract void operate(Stack<Long> stack) throws InvalidExpressionException;
 
     /**
      * @return the symbol representing this operation
