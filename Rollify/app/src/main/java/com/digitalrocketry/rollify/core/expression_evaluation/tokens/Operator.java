@@ -161,8 +161,9 @@ public abstract class Operator extends Token {
             return "/";
         }
         @Override
-        public void operate(Stack<Long> stack) {
+        public void operate(Stack<Long> stack) throws InvalidExpressionException {
             long a = stack.pop();
+            if (a == 0) throw new InvalidExpressionException("division by zero");
             long b = stack.pop();
             stack.push(b / a);
         }
