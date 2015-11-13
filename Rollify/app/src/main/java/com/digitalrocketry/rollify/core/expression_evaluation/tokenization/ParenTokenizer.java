@@ -23,13 +23,8 @@ public class ParenTokenizer implements Tokenizer {
             throws InvalidExpressionException {
         if (sc.peek() == '(') {
             sc.next();
-            /*
-            nestedParentheses ++;
-            List<Token> contents = new TokenizationContext(context).tokenize();
-            Token multiplier = ExpressionUtils.findCoefficientToken(context);
-            context.pushToOutput(new TokenGroup(multiplier, contents));
-            */
-
+            // push tokens to the output and stack so we can find the open paren when we hit
+            // the close paren
             Token multiplier = ExpressionUtils.findCoefficientToken(context);
             ParenControlToken parenToken = new ParenControlToken(multiplier);
             context.pushToOutput(parenToken);
@@ -59,8 +54,6 @@ public class ParenTokenizer implements Tokenizer {
             ParenControlToken parenToken = (ParenControlToken) context.popStack(); // remove paren token
 
             context.pushToOutput(new TokenGroup(parenToken.coefficient, contents));
-            //context.finish();
-            //nestedParentheses --;
             return true;
         } else {
             return false;
@@ -94,5 +87,5 @@ public class ParenTokenizer implements Tokenizer {
         public void operate(Stack<Long> stack) throws InvalidExpressionException {
             throw new InvalidExpressionException("mismatched parentheses");
         }
-    };
+    }
 }
