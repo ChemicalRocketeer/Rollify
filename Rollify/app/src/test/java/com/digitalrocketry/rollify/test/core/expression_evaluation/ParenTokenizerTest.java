@@ -1,5 +1,7 @@
 package com.digitalrocketry.rollify.test.core.expression_evaluation;
 
+import com.digitalrocketry.rollify.core.expression_evaluation.Evaluator;
+import com.digitalrocketry.rollify.core.expression_evaluation.InvalidExpressionException;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokens.IntegerToken;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.ParenTokenizer;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.StringScanner;
@@ -9,13 +11,53 @@ import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.Token
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import static org.junit.Assert.*;
 
 /**
  * Created by David Aaron Suddjian on 9/9/2015.
- */
+*/
 public class ParenTokenizerTest {
+
+    @Test
+    public void testReusability() throws Exception {
+        Tokenizer toke = new ParenTokenizer();
+        StringScanner scanner = new StringScanner("((((()");
+        TokenizationContext context = new TokenizationContext(scanner, Collections.singletonList(toke));
+        context.tokenize();
+        scanner = new StringScanner("(())");
+        context = new TokenizationContext(scanner, Collections.singletonList(toke));
+        try {
+            new Evaluator().evaluate(context.tokenize());
+        } catch (InvalidExpressionException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testMismtchedOpenParens() throws Exception {
+        Tokenizer toke = new ParenTokenizer();
+        TokenizationContext context = new TokenizationContext("(((()", Collections.singletonList(toke));
+        try {
+            new Evaluator().evaluate(context.tokenize());
+            fail("ParenTokenizer not failing on mismatched open parens");
+        } catch(InvalidExpressionException e) {
+            // expected behavior
+        }
+    }
+
+    @Test
+    public void testMismtchedCloseParens() throws Exception {
+        Tokenizer toke = new ParenTokenizer();
+        TokenizationContext context = new TokenizationContext("()))))", Collections.singletonList(toke));
+        try {
+            new Evaluator().evaluate(context.tokenize());
+            fail("ParenTokenizer not failing on mismatched close parens");
+        } catch(InvalidExpressionException e) {
+            // expected behavior
+        }
+    }
 
     @Test
     public void testTryTokenizeWithoutMultiplier() throws Exception {
