@@ -18,8 +18,8 @@ public class StringScannerTest {
         StringScanner s = new StringScanner("testxtest");
         assertEquals("test", s.readUntil('x'));
         assertTrue(s.hasNext());
-        assertTrue(s.next() == 'x');
-        assertEquals("test", s.readUntil('x'));
+        assertTrue(s.next() == 't');
+        assertEquals(null, s.readUntil('x'));
         assertFalse(s.hasNext());
     }
 
