@@ -1,5 +1,6 @@
 package com.digitalrocketry.rollify;
 
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -91,6 +92,9 @@ public class MainActivity extends AppCompatActivity implements EvaluationTask.Li
                 return true;
             case R.id.add_formula:
                 Log.i("Rollify menu", "add formula pressed");
+                Intent intent = new Intent(this, FormulaDetailsActivity.class);
+                intent.putExtra(FormulaDetailsActivity.EXPRESSION_MESSAGE, calcDisplay.getEditorText());
+                startActivity(intent);
                 return true;
             case R.id.action_clear_expression:
                 Log.i("Rollify menu", "action settings pressed");
