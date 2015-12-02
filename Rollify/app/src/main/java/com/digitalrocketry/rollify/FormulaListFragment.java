@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,9 +52,7 @@ public class FormulaListFragment extends Fragment {
         adapter = new FormulaAdapter(getContext(), Select.from(Formula.class), Formula.COMPARE_BY_NAME);
         list.setAdapter(adapter);
         if (adapter.isEmpty()) {
-            new Formula("Test Formula 1", "2d12+d4d6").save();
-            new Formula("Test Formula 2", "6(d20)").save();
-            new Formula("Test Formula 3", "8 + 200d2").save();
+            seedFormulas();
             updateFormulaView();
         }
         registerForContextMenu(list);
@@ -66,14 +65,19 @@ public class FormulaListFragment extends Fragment {
         return layout;
     }
 
+    public void seedFormulas() {
+        new Formula("Test Formula 1", "2d12+d4d6").save();
+        new Formula("Test Formula 2", "6d4(d20)").save();
+        new Formula("Test Formula 3", "2d12 + 8").save();
+    }
+
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         if (v.getId() == R.id.formulaListView) {
             AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+            MenuInflater inflater = getActivity().getMenuInflater();
+            inflater.inflate(R.menu.formula_context, menu);
             menu.setHeaderTitle(adapter.getItem(info.position).getName());
-            for (String option : new String[] { "Use", "Edit", "Delete" }) {
-                menu.add(option);
-            }
         }
     }
 
@@ -81,19 +85,17 @@ public class FormulaListFragment extends Fragment {
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         Formula f = adapter.getItem(info.position);
+        Log.i("Rollify context", String.valueOf(item.getItemId()));
         switch (item.getItemId()) {
-            case 0:
-                Log.i("Rollify", "context item case 0");
+            case R.id.menu_use_formula:
                 if (formulaUser != null) {
                     formulaUser.useFormula(f);
                 }
                 break;
-            case 1:
-                Log.i("Rollify", "context item case 1");
+            case R.id.menu_edit_formula:
                 startFormulaDetailsActivity(f);
                 break;
-            case 2:
-                Log.i("Rollify", "context item case 2");
+            case R.id.menu_delete_formula:
                 f.delete();
                 adapter.notifyDataSetChanged();
                 break;
