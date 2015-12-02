@@ -63,12 +63,16 @@ public class FormulaDetailsActivity extends Activity {
             // the formula doesn't exist yet, so make it now
             // The formula is created at this stage so that it gets the correct creationTime value.
             formula = new Formula();
-    }
+        }
         formula.setExpression(expressionView.getText().toString());
         formula.setName(nameView.getText().toString());
         formula.save();
 
         Log.i("Rollify", "formula saved");
+        finish();
+    }
+
+    public void cancel(View v) {
         finish();
     }
 
