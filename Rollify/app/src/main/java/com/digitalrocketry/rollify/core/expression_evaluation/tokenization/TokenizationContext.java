@@ -4,6 +4,7 @@ import com.digitalrocketry.rollify.core.expression_evaluation.InvalidExpressionE
 import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Operator;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Token;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,12 +25,20 @@ import java.util.Stack;
  */
 public class TokenizationContext {
 
+    private static List<Tokenizer> defaultTokenizers = Arrays.asList(
+            new IntegerTokenizer(), new OperatorTokenizer(), new DieDefTokenizer(), new ParenTokenizer()
+    );
+
     private StringScanner scanner;
     private List<Tokenizer> tokenizers;
     private List<Token> output;
     private Stack<Operator> stack;
     private Token lastToken;
     private boolean finished;
+
+    public TokenizationContext(String expression) {
+        this(expression, defaultTokenizers);
+    }
 
     public TokenizationContext(String expression, List<Tokenizer> tokenizers) {
         this(new StringScanner(expression), tokenizers);
