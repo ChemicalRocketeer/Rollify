@@ -1,6 +1,6 @@
 package com.digitalrocketry.rollify.test.core.expression_evaluation;
 
-import com.digitalrocketry.rollify.core.expression_evaluation.tokens.NumberToken;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.IntegerToken;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Operator;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Token;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokens.TokenGroup;
@@ -22,10 +22,10 @@ public class TokenGroupTest {
     public void testOperate() throws Exception {
         Stack<Long> stack = new Stack<>();
         List<Token> tokens = new ArrayList<>();
-        tokens.add(new NumberToken(2));
-        tokens.add(new NumberToken(2));
+        tokens.add(new IntegerToken(2));
+        tokens.add(new IntegerToken(2));
         tokens.add(Operator.ADD);
-        TokenGroup toke = new TokenGroup(new NumberToken(1), tokens);
+        TokenGroup toke = new TokenGroup(new IntegerToken(1), tokens);
         toke.operate(stack);
         assertEquals(1, stack.size());
         assertEquals(4, (long) stack.peek());
@@ -34,15 +34,15 @@ public class TokenGroupTest {
         assertEquals(4, (long) stack.peek());
 
         tokens.clear();
-        tokens.add(new NumberToken(-1));
-        toke = new TokenGroup(new NumberToken(5), tokens);
+        tokens.add(new IntegerToken(-1));
+        toke = new TokenGroup(new IntegerToken(5), tokens);
         toke.operate(stack);
         assertEquals(3, stack.size());
         assertEquals(-5, (long) stack.peek());
 
         tokens.clear();
-        tokens.add(new NumberToken(1));
-        toke = new TokenGroup(new NumberToken(-5), tokens);
+        tokens.add(new IntegerToken(1));
+        toke = new TokenGroup(new IntegerToken(-5), tokens);
         toke.operate(stack);
         assertEquals(4, stack.size());
         assertEquals(-5, (long) stack.peek());
@@ -50,27 +50,27 @@ public class TokenGroupTest {
 
     @Test
     public void testIsNumber() throws Exception {
-        assertTrue(new TokenGroup(new NumberToken(1), new ArrayList<Token>()).isNumber());
+        assertTrue(new TokenGroup(new IntegerToken(1), new ArrayList<Token>()).isNumber());
     }
 
     @Test
     public void testToString() throws Exception {
         List<Token> tokens = new ArrayList<>();
-        tokens.add(new NumberToken(2));
-        tokens.add(new NumberToken(2));
+        tokens.add(new IntegerToken(2));
+        tokens.add(new IntegerToken(2));
         tokens.add(Operator.ADD);
-        TokenGroup toke = new TokenGroup(new NumberToken(1), tokens);
+        TokenGroup toke = new TokenGroup(new IntegerToken(1), tokens);
         assertEquals("1(2 2 +)", toke.toString());
         List<Token> tokens2 = new ArrayList<>();
-        tokens2.add(new NumberToken(20));
-        tokens2.add(new NumberToken(4));
+        tokens2.add(new IntegerToken(20));
+        tokens2.add(new IntegerToken(4));
         tokens2.add(Operator.MUL);
-        TokenGroup toke2 = new TokenGroup(new NumberToken(2), tokens2);
+        TokenGroup toke2 = new TokenGroup(new IntegerToken(2), tokens2);
         assertEquals("2(20 4 *)", toke2.toString());
         List<Token> tokens3 = new ArrayList<>();
         tokens3.add(toke);
         tokens3.add(toke2);
-        TokenGroup toke3 = new TokenGroup(new NumberToken(3), tokens3);
+        TokenGroup toke3 = new TokenGroup(new IntegerToken(3), tokens3);
         assertEquals("3(1(2 2 +) 2(20 4 *))", toke3.toString());
     }
 }

@@ -24,17 +24,14 @@ public class TokenizationContextTest {
         List<Tokenizer> tokenizers = Arrays.asList(TestingUtils.ONE_OR_ADD);
         StringScanner steve = new StringScanner("12345");
         TokenizationContext context = new TokenizationContext(steve, tokenizers);
-        context.tokenize();
+        List<Token> output = context.tokenize();
         assertFalse(steve.hasNext());
-        List<Token> output = context.getOutputTokens();
-        Stack<Operator> opStack = context.getOpStack();
-        assertEquals(5, output.size());
+        assertEquals(null, context.popStack());
         assertEquals("1", output.get(0).toString());
         assertEquals("1", output.get(1).toString());
         assertEquals("+", output.get(2).toString());
         assertEquals("1", output.get(3).toString());
         assertEquals("+", output.get(4).toString());
-        assertEquals(0, opStack.size());
     }
 
     @Test
@@ -51,8 +48,8 @@ public class TokenizationContextTest {
         TokenizationContext context = new TokenizationContext(steve, Arrays.asList(finisher));
         context.tokenize();
         assertEquals(1, steve.getCursor());
-        assertEquals(0, context.getOpStack().size());
-        assertEquals(0, context.getOutputTokens().size());
+        assertEquals(null, context.popStack());
+        assertEquals(null, context.popOutput());
     }
 
     @Test
@@ -71,10 +68,10 @@ public class TokenizationContextTest {
         StringScanner steve = new StringScanner("1");
         TokenizationContext context = new TokenizationContext(steve, tokenizers);
         context.tokenize();
-        assertTrue(context.lastTokenWasnumber());
+        assertTrue(context.lastTokenWasNumber());
         steve = new StringScanner("");
         context = new TokenizationContext(steve, tokenizers);
         context.tokenize();
-        assertFalse(context.lastTokenWasnumber());
+        assertFalse(context.lastTokenWasNumber());
     }
 }

@@ -4,11 +4,13 @@ import java.util.Stack;
 
 /**
  * Created by David Aaron Suddjian on 9/1/2015.
+ *
+ * A Token with a single numerical value
  */
-public class NumberToken extends Token {
+public class IntegerToken extends Token {
     private long num;
 
-    public NumberToken(long num) {
+    public IntegerToken(long num) {
         this.num = num;
     }
 

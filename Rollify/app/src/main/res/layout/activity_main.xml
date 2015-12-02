@@ -5,37 +5,59 @@
     android:orientation="vertical"
     tools:context="com.digitalrocketry.rollify.MainActivity">
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:elevation="6dp"
-    android:id="@+id/calcDisplayElevation">
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/calcDisplayContainer"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin">
+        android:elevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/calcDisplayContainer"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin">
+
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:name="com.digitalrocketry.rollify.CalculatorDisplayFragment"
+                android:id="@+id/calcDisplayFragment"
+                android:layout_gravity="right"
+                tools:layout="@layout/fragment_calculator_display" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <com.digitalrocketry.rollify.FormulaListViewPager
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/formula_view_pager"
+        android:overScrollMode="never" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <!-- the relativelayout is required to make the right margin on the fragment work -->
+
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:name="com.digitalrocketry.rollify.NumpadFragment"
+                android:id="@+id/calcNumpadFragment"
+                android:layout_gravity="right"
+                tools:layout="@layout/fragment_numpad"
+                android:layout_marginRight="@dimen/padPageMargin" />
+        </RelativeLayout>
 
         <fragment
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:name="com.digitalrocketry.rollify.CalculatorDisplayFragment"
-            android:id="@+id/calcDisplayFragment"
+            android:layout_height="match_parent"
+            android:name="com.digitalrocketry.rollify.FormulaListFragment"
+            android:id="@+id/calcFormulaListFragment"
             android:layout_gravity="right"
-            tools:layout="@layout/fragment_calculator_display" />
-
-    </RelativeLayout>
-</RelativeLayout>
-
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.digitalrocketry.rollify.NumpadFragment"
-        android:id="@+id/calcNumpadFragment"
-        android:layout_gravity="right"
-        tools:layout="@layout/fragment_numpad" />
+            tools:layout="@layout/fragment_formula_list" />
+    </com.digitalrocketry.rollify.FormulaListViewPager>
 
 </LinearLayout>

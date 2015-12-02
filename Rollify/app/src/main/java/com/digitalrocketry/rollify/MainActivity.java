@@ -1,5 +1,7 @@
 package com.digitalrocketry.rollify;
 
+import android.content.Intent;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +18,8 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity implements EvaluationTask.Listener {
 
     CalculatorDisplayFragment calcDisplay;
-    Map<Integer, String> entryButtonMap;
+    Map<Integer, String> entryButtonMap; // map keypad buttons to their expression text values
+    private ViewPager formulaListPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,24 @@ public class MainActivity extends AppCompatActivity implements EvaluationTask.Li
         entryButtonMap.put(R.id.calcButtonD12, "d12");
         entryButtonMap.put(R.id.calcButtonD20, "d20");
         entryButtonMap.put(R.id.calcButtonD100, "d100");
+
         calcDisplay = (CalculatorDisplayFragment) getFragmentManager().findFragmentById(R.id.calcDisplayFragment);
+        FormulaListFragment fListFrag = (FormulaListFragment) getSupportFragmentManager().findFragmentById(R.id.calcFormulaListFragment);
+        fListFrag.setFormulaUser(calcDisplay);
+
+        formulaListPager = (ViewPager) findViewById(R.id.formula_view_pager);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (formulaListPager.getCurrentItem() == 0) {
+            // If the user is currently looking at the first step, allow the system to handle the
+            // Back button. This calls finish() on this activity and pops the back stack.
+            super.onBackPressed();
+        } else {
+            // Otherwise, select the previous step.
+            formulaListPager.setCurrentItem(formulaListPager.getCurrentItem() - 1);
+        }
     }
 
     @Override
@@ -72,6 +92,9 @@ public class MainActivity extends AppCompatActivity implements EvaluationTask.Li
                 return true;
             case R.id.add_formula:
                 Log.i("Rollify menu", "add formula pressed");
+                Intent intent = new Intent(this, FormulaDetailsActivity.class);
+                intent.putExtra(FormulaDetailsActivity.EXPRESSION_MESSAGE, calcDisplay.getEditorText());
+                startActivity(intent);
                 return true;
             case R.id.action_clear_expression:
                 Log.i("Rollify menu", "action settings pressed");

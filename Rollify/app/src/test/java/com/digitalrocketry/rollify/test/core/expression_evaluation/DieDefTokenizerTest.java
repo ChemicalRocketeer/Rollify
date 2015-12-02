@@ -1,7 +1,7 @@
 package com.digitalrocketry.rollify.test.core.expression_evaluation;
 
 import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.DieDefTokenizer;
-import com.digitalrocketry.rollify.core.expression_evaluation.tokens.NumberToken;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.IntegerToken;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.StringScanner;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.TokenizationContext;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.Tokenizer;
@@ -34,7 +34,7 @@ public class DieDefTokenizerTest {
         DieDefTokenizer toke = new DieDefTokenizer();
         List<Tokenizer> tokenizerList = new ArrayList<>();
         TokenizationContext context = new TokenizationContext(new StringScanner(""), tokenizerList);
-        context.commitToken(new NumberToken(10));
+        context.pushToOutput(new IntegerToken(10));
         StringScanner steve = new StringScanner("d20xxxxxx");
         toke.tryTokenize(context, steve);
         assertEquals("10d20", context.getLastToken().toString());
@@ -46,7 +46,7 @@ public class DieDefTokenizerTest {
         DieDefTokenizer toke = new DieDefTokenizer();
         List<Tokenizer> tokenizerList = new ArrayList<>();
         TokenizationContext context = new TokenizationContext(new StringScanner(""), tokenizerList);
-        context.commitToken(new NumberToken(-10));
+        context.pushToOutput(new IntegerToken(-10));
         StringScanner steve = new StringScanner("d20xxxxxx");
         toke.tryTokenize(context, steve);
         assertEquals("-10d20", context.getLastToken().toString());

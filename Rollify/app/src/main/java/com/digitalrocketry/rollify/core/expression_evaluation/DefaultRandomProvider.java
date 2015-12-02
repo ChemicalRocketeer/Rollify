@@ -4,6 +4,8 @@ import java.util.Random;
 
 /**
  * Created by David Aaron Suddjian on 9/4/2015.
+ *
+ * The default RandomProvider, implementing some actual randomness.
  */
 public class DefaultRandomProvider implements RandomProvider {
 

@@ -2,5 +2,11 @@
     <string name="app_name">Rollify</string>
     <string name="title_activity_main">Rollify</string>
     <string name="action_settings">Settings</string>
+    <string name="db_filename">rollify.db</string>
     <string name="add_formula">M+</string>
+    <string name="formulaNameHintText">Name</string>
+    <string name="formulaExpressionHintText">Expression</string>
+    <string name="formulaSubmitButtonText">Save</string>
+    <string name="formulaCancelButtonText">Cancel</string>
+    <string name="formula_details_label">New Formula</string>
 </resources>

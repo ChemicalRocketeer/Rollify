@@ -1,6 +1,6 @@
 package com.digitalrocketry.rollify.test.core.expression_evaluation;
 
-import com.digitalrocketry.rollify.core.expression_evaluation.tokens.NumberToken;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.IntegerToken;
 
 import org.junit.Test;
 
@@ -11,15 +11,15 @@ import static org.junit.Assert.*;
 /**
  * Created by David Aaron Suddjian on 9/8/2015.
  */
-public class NumberTokenTest {
+public class IntegerTokenTest {
 
     @Test
     public void testOperate() throws Exception {
-        NumberToken toke = new NumberToken(5);
+        IntegerToken toke = new IntegerToken(5);
         Stack<Long> stack = new Stack<>();
         toke.operate(stack);
         assertEquals(5, (long) stack.peek());
-        toke = new NumberToken(8);
+        toke = new IntegerToken(8);
         toke.operate(stack);
         assertEquals(2, stack.size());
         assertEquals(8, (long) stack.peek());
@@ -27,17 +27,17 @@ public class NumberTokenTest {
 
     @Test
     public void testIsNumber() throws Exception {
-        NumberToken toke = new NumberToken(0);
+        IntegerToken toke = new IntegerToken(0);
         assertTrue(toke.isNumber());
     }
 
     @Test
     public void testToString() throws Exception {
-        NumberToken toke = new NumberToken(0);
+        IntegerToken toke = new IntegerToken(0);
         assertEquals("0", toke.toString());
-        toke = new NumberToken(-500);
+        toke = new IntegerToken(-500);
         assertEquals("-500", toke.toString());
-        toke = new NumberToken(Long.MAX_VALUE);
+        toke = new IntegerToken(Long.MAX_VALUE);
         assertEquals(String.valueOf(Long.MAX_VALUE), toke.toString());
     }
 }

@@ -5,7 +5,7 @@ import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.Strin
 import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.TokenizationContext;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.Tokenizer;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokens.DieToken;
-import com.digitalrocketry.rollify.core.expression_evaluation.tokens.NumberToken;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.IntegerToken;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Operator;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Token;
 
@@ -55,8 +55,8 @@ public class EvaluatorTest {
     @Test
     public void testEvaluate2() throws Exception {
         List<Token> tokens = new ArrayList<>();
-        tokens.add(new NumberToken(1));
-        tokens.add(new NumberToken(1));
+        tokens.add(new IntegerToken(1));
+        tokens.add(new IntegerToken(1));
         tokens.add(Operator.SUB);
         Result r = new Evaluator().evaluate(tokens);
         assertEquals(0, r.getResult());
@@ -65,7 +65,7 @@ public class EvaluatorTest {
     @Test
     public void testEvaluateToken() throws Exception {
         ExpressionUtils.RAND = TestingUtils.MAX;
-        Result r = new Evaluator().evaluate(new DieToken(new NumberToken(2), 20));
+        Result r = new Evaluator().evaluate(new DieToken(new IntegerToken(2), 20));
         assertEquals(40, r.getResult());
     }
 }
