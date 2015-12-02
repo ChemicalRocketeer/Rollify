@@ -65,6 +65,12 @@ public class FormulaListFragment extends Fragment {
         return layout;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateFormulaView();
+    }
+
     public void seedFormulas() {
         new Formula("Test Formula 1", "2d12+d4d6").save();
         new Formula("Test Formula 2", "6d4(d20)").save();
@@ -85,7 +91,6 @@ public class FormulaListFragment extends Fragment {
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         Formula f = adapter.getItem(info.position);
-        Log.i("Rollify context", String.valueOf(item.getItemId()));
         switch (item.getItemId()) {
             case R.id.menu_use_formula:
                 if (formulaUser != null) {

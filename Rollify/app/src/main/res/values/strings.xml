@@ -8,4 +8,5 @@
     <string name="formulaExpressionHintText">Expression</string>
     <string name="formulaSubmitButtonText">Save</string>
     <string name="formulaCancelButtonText">Cancel</string>
+    <string name="formula_details_label">New Formula</string>
 </resources>

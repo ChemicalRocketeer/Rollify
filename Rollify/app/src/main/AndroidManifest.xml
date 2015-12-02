@@ -34,7 +34,9 @@
                 android:name="DOMAIN_PACKAGE_NAME"
                 android:value="com.digitalrocketry.rollify.db" />
         </activity>
-        <activity android:name=".FormulaDetailsActivity" >
+        <activity
+            android:name=".FormulaDetailsActivity"
+            android:label="@string/formula_details_label">
         </activity>
     </application>
 

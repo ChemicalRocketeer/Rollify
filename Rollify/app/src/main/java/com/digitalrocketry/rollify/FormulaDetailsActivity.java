@@ -3,6 +3,8 @@ package com.digitalrocketry.rollify;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.digitalrocketry.rollify.db.Formula;
@@ -55,7 +57,7 @@ public class FormulaDetailsActivity extends Activity {
         }
     }
 
-    public void save() {
+    public void save(View v) {
         // TODO: Check for valid name and expression before saving!
         if (formula == null) {
             // the formula doesn't exist yet, so make it now
@@ -65,6 +67,8 @@ public class FormulaDetailsActivity extends Activity {
         formula.setExpression(expressionView.getText().toString());
         formula.setName(nameView.getText().toString());
         formula.save();
+
+        Log.i("Rollify", "formula saved");
         finish();
     }
 
