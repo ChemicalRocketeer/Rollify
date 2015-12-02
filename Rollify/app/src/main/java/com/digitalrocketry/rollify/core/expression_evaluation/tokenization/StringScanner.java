@@ -111,6 +111,23 @@ public class StringScanner {
     }
 
     /**
+     * Reads until the character c is reached, leaving the cursor pointing at c
+     *
+     * Given a StringScanner with String "xyz!123" and a cursor at index 0,
+     * a call to readUntil('!') would return "xyz" and leave the cursor at index 3.
+     *
+     * @param c the character to look for
+     * @return all the characters read, excluding c
+     */
+    public String readUntil(char c) {
+        StringBuilder steve = new StringBuilder();
+        while (hasNext() && peek() != c) {
+            steve.append(next());
+        }
+        return steve.toString();
+    }
+
+    /**
      * Reads past any whitespace at the cursor
      */
     public void skipWhitespace() {
