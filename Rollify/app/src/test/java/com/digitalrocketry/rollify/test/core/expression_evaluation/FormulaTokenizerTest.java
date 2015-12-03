@@ -9,7 +9,6 @@ import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Token;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokens.TokenGroup;
 import com.digitalrocketry.rollify.db.Formula;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -26,10 +25,11 @@ import static org.junit.Assert.*;
 public class FormulaTokenizerTest {
 
     private static Formula testFormula, nestFormula, loopFormula1, loopFormula2;
-    private FormulaTokenizer formulatizer;
+    private static FormulaTokenizer formulatizer;
 
     @BeforeClass
     public static void setup() {
+        formulatizer = new FormulaTokenizer();
         testFormula = new Formula("test formula", "1+1");
         nestFormula = new Formula("nest formula", "1+[test formula]");
         loopFormula1 = new Formula("loop formula 1", "1+[loop formula 2]");
@@ -53,15 +53,11 @@ public class FormulaTokenizerTest {
         });
     }
 
-    @Before
-    public void before() {
-        formulatizer = new FormulaTokenizer();
-    }
-
     @Test
     public void testShouldReadFormulas() throws Exception {
         StringScanner s = new StringScanner("[test formula]");
         TokenizationContext context = new TokenizationContext(s, Arrays.asList(formulatizer, TestingUtils.ONE_OR_ADD));
+
         List<Token> results = context.tokenize();
         assertFalse(s.hasNext());
         assertEquals(1, results.size());
@@ -90,6 +86,22 @@ public class FormulaTokenizerTest {
             fail();
         } catch (InvalidExpressionException e) {
             assertTrue(e.getMessage().contains(FormulaTokenizer.SELF_REFERENTIAL_FORMULA_MSG));
+        }
+    }
+
+    @Test
+    public void testShouldCorrectlyTokenizeNonSelfReferentialFormulas() throws Exception {
+        try {
+            new TokenizationContext("[test formula]", Arrays.asList(formulatizer, TestingUtils.ONE_OR_ADD))
+                    .tokenize();
+            new TokenizationContext("[test formula]", Arrays.asList(formulatizer, TestingUtils.ONE_OR_ADD))
+                    .tokenize();
+            new TokenizationContext("[nest formula]", Arrays.asList(formulatizer, TestingUtils.ONE_OR_ADD))
+                    .tokenize();
+            new TokenizationContext("[nest formula]", Arrays.asList(formulatizer, TestingUtils.ONE_OR_ADD))
+                    .tokenize();
+        } catch (InvalidExpressionException e) {
+            fail();
         }
     }
 }
