@@ -14,6 +14,16 @@ import static org.junit.Assert.*;
 public class StringScannerTest {
 
     @Test
+    public void testReadUntil() throws Exception {
+        StringScanner s = new StringScanner("testxtest");
+        assertEquals("test", s.readUntil('x'));
+        assertTrue(s.hasNext());
+        assertTrue(s.next() == 't');
+        assertEquals(null, s.readUntil('x'));
+        assertFalse(s.hasNext());
+    }
+
+    @Test
     public void testHasNext() throws Exception {
         StringScanner s = new StringScanner("test\n");
         assertTrue(s.hasNext());

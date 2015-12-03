@@ -4,6 +4,7 @@ import com.digitalrocketry.rollify.core.expression_evaluation.InvalidExpressionE
 import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Operator;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Token;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,22 +25,38 @@ import java.util.Stack;
  */
 public class TokenizationContext {
 
+    private static List<Tokenizer> defaultTokenizers = Arrays.asList(
+            new IntegerTokenizer(),
+            new OperatorTokenizer(),
+            new DieDefTokenizer(),
+            new ParenTokenizer(),
+            new FormulaTokenizer()
+    );
+
     private StringScanner scanner;
-    private List<Tokenizer> tokenizers;
+    private List<? extends Tokenizer> tokenizers;
     private List<Token> output;
     private Stack<Operator> stack;
     private Token lastToken;
     private boolean finished;
 
-    public TokenizationContext(String expression, List<Tokenizer> tokenizers) {
-        this(new StringScanner(expression), tokenizers);
+    public TokenizationContext(String expression) {
+        this(expression, defaultTokenizers);
+    }
+
+    public TokenizationContext(String expression, TokenizationContext other) {
+        this(new StringScanner(expression), other.tokenizers);
     }
 
     public TokenizationContext(TokenizationContext other) {
         this(other.scanner, other.tokenizers);
     }
 
-    public TokenizationContext(StringScanner scanner, List<Tokenizer> tokenizers) {
+    public TokenizationContext(String expression, List<? extends Tokenizer> tokenizers) {
+        this(new StringScanner(expression), tokenizers);
+    }
+
+    public TokenizationContext(StringScanner scanner, List<? extends Tokenizer> tokenizers) {
         this.scanner = scanner;
         this.tokenizers = tokenizers;
         this.output = new LinkedList<>();
@@ -60,7 +77,7 @@ public class TokenizationContext {
         this.finished = false;
         while (scanner.hasNext() && !finished) {
             boolean currentTokenConsumed = false;
-            Iterator<Tokenizer> it = tokenizers.iterator();
+            Iterator<? extends Tokenizer> it = tokenizers.iterator();
             while (it.hasNext() && !currentTokenConsumed) {
                 // If the current tokenizer consumes a token,
                 // leave the cursor position where that tokenizer left off. Otherwise we

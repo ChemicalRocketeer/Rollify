@@ -29,13 +29,9 @@ import java.util.Stack;
  */
 public class Evaluator {
 
-    private static List<Tokenizer> tokenizers = Arrays.asList(
-            new IntegerTokenizer(), new OperatorTokenizer(), new DieDefTokenizer(), new ParenTokenizer()
-    );
-
     public Result evaluate(String expression)
             throws  InvalidExpressionException {
-        TokenizationContext context = new TokenizationContext(expression, tokenizers);
+        TokenizationContext context = new TokenizationContext(expression);
         return evaluate(context);
     }
 

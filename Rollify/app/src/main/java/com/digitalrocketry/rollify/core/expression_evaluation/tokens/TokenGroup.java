@@ -19,7 +19,7 @@ public class TokenGroup extends Token {
     private List<Token> contents;
 
     public TokenGroup(Token coefficient, List<Token> contents) {
-        this.coefficientToken = coefficient;
+        this.coefficientToken = coefficient == null ? new IntegerToken(1) : coefficient;
         this.contents = contents;
     }
 
