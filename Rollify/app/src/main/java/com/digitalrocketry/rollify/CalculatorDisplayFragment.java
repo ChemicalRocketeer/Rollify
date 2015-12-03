@@ -68,6 +68,6 @@ public class CalculatorDisplayFragment extends Fragment implements FormulaListFr
 
     @Override
     public void useFormula(Formula f) {
-        insertTextAtCursor(f.getExpression());
+        insertTextAtCursor("[" + f.getName() + "]");
     }
 }
