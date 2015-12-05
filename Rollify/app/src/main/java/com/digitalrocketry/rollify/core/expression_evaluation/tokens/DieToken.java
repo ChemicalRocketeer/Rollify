@@ -4,6 +4,7 @@ import com.digitalrocketry.rollify.core.expression_evaluation.Evaluator;
 import com.digitalrocketry.rollify.core.expression_evaluation.ExpressionUtils;
 import com.digitalrocketry.rollify.core.expression_evaluation.InvalidExpressionException;
 
+import java.util.Arrays;
 import java.util.Stack;
 
 /**
@@ -13,23 +14,23 @@ import java.util.Stack;
  */
 public class DieToken extends Token {
 
+    public enum KeepRule {
+        HIGHEST, LOWEST, ALL
+    }
+
     public static final long MAX_DIE_TYPE = 1000000000; // the largest die type we care to represent
 
     private Token dieCount;
     private long dieType;
+    private KeepRule keepRule;
+    private int keepCount;
 
-    public DieToken(Token dieCount, long dieType) {
+    public DieToken(Token dieCount, long dieType, KeepRule keepRule, int keepCount) {
         this.dieCount = dieCount;
         this.dieType = dieType;
+        this.keepRule = keepRule;
+        this.keepCount = keepCount;
     }
-
-    @Override
-    public boolean isNumber() {
-        return true;
-    }
-
-    @Override
-    public boolean isVariable() { return true; }
 
     /**
      * Rolls the dice specified in the die definition, combines them, and pushes the result onto the stack
@@ -47,9 +48,23 @@ public class DieToken extends Token {
         for (int i = 0; i < results.length; i++) {
             results[i] = ExpressionUtils.RAND.nextLong(1, dieType);
         }
+
+        // implement the keep rule
+        long[] resultsForCounting = results; // used for counting, not necessarily in the original order
+        int start = 0, end = results.length;
+        if (keepRule == KeepRule.HIGHEST || keepRule == KeepRule.LOWEST) {
+            results = Arrays.copyOf(results, results.length);
+            Arrays.sort(results);
+            if (keepRule == KeepRule.LOWEST) {
+                end = keepCount;
+            } else {
+                start = end - keepCount - 1;
+            }
+        }
+
         long total = 0;
-        for (long die : results) {
-            total += die;
+        for (int i = start; i < end; i++) {
+            total += results[i];
         }
         if (negative) {
             total = -total;
@@ -58,11 +73,29 @@ public class DieToken extends Token {
     }
 
     @Override
+    public boolean isNumber() {
+        return true;
+    }
+
+    @Override
+    public boolean isVariable() { return true; }
+
+    @Override
     public String toString() {
         StringBuilder steve = new StringBuilder();
         steve.append(dieCount.toString());
         steve.append("d");
         steve.append(dieType);
+        switch (keepRule) {
+            case HIGHEST:
+                steve.append("h");
+                steve.append(keepCount);
+                break;
+            case LOWEST:
+                steve.append("l");
+                steve.append(keepCount);
+                break;
+        }
         return steve.toString();
     }
 }

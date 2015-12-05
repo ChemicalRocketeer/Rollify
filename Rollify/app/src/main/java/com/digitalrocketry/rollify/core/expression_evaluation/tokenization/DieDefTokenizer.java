@@ -24,7 +24,7 @@ import java.util.List;
 public class DieDefTokenizer implements Tokenizer {
 
     private static List<Token> fudgeEquation = Arrays.asList(
-            new DieToken(new IntegerToken(1), 3),
+            new DieToken(new IntegerToken(1), 3, DieToken.KeepRule.ALL, 1),
             new IntegerToken(2),
             Operator.SUB);
 
@@ -35,8 +35,23 @@ public class DieDefTokenizer implements Tokenizer {
             sc.skipWhitespace();
             if (sc.hasNextDigit()) {
                 long dieType = sc.nextLong();
+                DieToken.KeepRule keepRule = DieToken.KeepRule.ALL;
+                int keepCount = 1;
+                if (sc.hasNext('h')) {
+                    sc.next();
+                    keepRule = DieToken.KeepRule.HIGHEST;
+                    if (sc.hasNextDigit()) {
+                        keepCount = (int) sc.nextLong();
+                    }
+                } else if (sc.hasNext('l')) {
+                    sc.next();
+                    keepRule = DieToken.KeepRule.LOWEST;
+                    if (sc.hasNextDigit()) {
+                        keepCount = (int) sc.nextLong();
+                    }
+                }
                 Token dieCount = ExpressionUtils.findCoefficientToken(context);
-                context.pushToOutput(new DieToken(dieCount, dieType));
+                context.pushToOutput(new DieToken(dieCount, dieType, keepRule, keepCount));
             } else if (sc.hasNext('f')) {
                 // this is a fudge die
                 sc.next();
