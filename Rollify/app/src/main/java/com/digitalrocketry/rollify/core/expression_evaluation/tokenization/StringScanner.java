@@ -45,6 +45,14 @@ public class StringScanner {
     }
 
     /**
+     * @param c a character to look for
+     * @return true if the cursor is pointing at a character c
+     */
+    public boolean hasNext(char c) {
+        return hasNext() && peek() == c;
+    }
+
+    /**
      * @return true if there is a digit left to read
      */
     public boolean hasNextDigit() {

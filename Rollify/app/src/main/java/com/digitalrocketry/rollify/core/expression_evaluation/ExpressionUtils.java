@@ -4,6 +4,7 @@ import com.digitalrocketry.rollify.core.expression_evaluation.tokenization.Token
 import com.digitalrocketry.rollify.core.expression_evaluation.tokens.IntegerToken;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Token;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -49,5 +50,18 @@ public class ExpressionUtils {
             }
         }
         return false;
+    }
+
+    public static String toString(List<Token> tokens) {
+        StringBuilder steve = new StringBuilder();
+        Iterator<Token> it = tokens.iterator();
+        if (it.hasNext()) {
+            steve.append(it.next());
+        }
+        while (it.hasNext()) {
+            steve.append(' ');
+            steve.append(it.next().toString());
+        }
+        return steve.toString();
     }
 }

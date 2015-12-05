@@ -78,14 +78,7 @@ public class TokenGroup extends Token {
         StringBuilder steve = new StringBuilder();
         steve.append(coefficientToken.toString());
         steve.append('(');
-        Iterator<Token> it = contents.iterator();
-        if (it.hasNext()) {
-            steve.append(it.next().toString());
-        }
-        while (it.hasNext()) {
-            steve.append(' ');
-            steve.append(it.next().toString());
-        }
+        steve.append(ExpressionUtils.toString(contents));
         steve.append(')');
         return steve.toString();
     }
