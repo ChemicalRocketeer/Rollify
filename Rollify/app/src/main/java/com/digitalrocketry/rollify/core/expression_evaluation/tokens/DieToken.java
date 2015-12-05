@@ -56,7 +56,7 @@ public class DieToken extends Token {
             results = Arrays.copyOf(results, results.length);
             Arrays.sort(results);
             if (keepRule == KeepRule.LOWEST) {
-                end = keepCount - 1;
+                end = keepCount;
             } else {
                 start = end - keepCount - 1;
             }
