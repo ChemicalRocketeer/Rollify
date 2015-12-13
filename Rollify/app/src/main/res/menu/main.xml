@@ -7,10 +7,12 @@
         app:showAsAction="withText|ifRoom" />
     <item
         android:id="@+id/action_backspace"
+        android:icon="@drawable/ic_backspace_white_24dp"
         android:title="-b"
         app:showAsAction="withText|ifRoom" />
     <item
         android:id="@+id/action_clear_expression"
+        android:icon="@drawable/ic_clear_white_24dp"
         android:title="-X"
         app:showAsAction="withText|ifRoom" />
 </menu>
