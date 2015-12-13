@@ -84,6 +84,11 @@ public class MultiplierToken extends Token {
     public String toString() {
         StringBuilder steve = new StringBuilder();
         steve.append(coefficient.toString());
+        // A space is used here because it allows maximum clarity of information.
+        // Parentheses are already used by TokenGroup, and wouldn't work because 2d4
+        // would become 2(d4) and then if that were tokenized again would become 2((d4)) etc.
+        // The space is needed because without it, two numbers might end up next to each other
+        // and could be interpreted as one larger number.
         steve.append(" ");
         steve.append(body.toString());
         switch (keepRule) {

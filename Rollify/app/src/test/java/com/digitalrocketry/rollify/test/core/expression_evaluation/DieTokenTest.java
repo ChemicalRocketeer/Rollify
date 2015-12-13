@@ -32,36 +32,30 @@ public class DieTokenTest {
 
     @Test
     public void testIsNumber() throws Exception {
-        DieToken toke = new DieToken(new IntegerToken(1), 6);
+        DieToken toke = new DieToken(6);
         assertTrue(toke.isNumber());
     }
 
     @Test
     public void testOperate() throws Exception {
         ExpressionUtils.RAND = TestingUtils.MIN;
-        DieToken toke = new DieToken(new IntegerToken(6), 6);
+        DieToken toke = new DieToken(6);
         Stack<Long> stack = new Stack<>();
         toke.operate(stack);
-        assertEquals(6, (long) stack.peek());
+        assertEquals(1, (long) stack.peek());
         assertEquals(1, stack.size());
 
         ExpressionUtils.RAND = TestingUtils.MAX;
-        toke = new DieToken(new IntegerToken(2), 6);
+        toke = new DieToken(6);
         stack = new Stack<>();
         toke.operate(stack);
-        assertEquals(12, (long) stack.peek());
-        assertEquals(1, stack.size());
-
-        toke = new DieToken(new DieToken(new IntegerToken(1), 10), 10);
-        stack = new Stack<>();
-        toke.operate(stack);
-        assertEquals(100, (long) stack.peek());
+        assertEquals(6, (long) stack.peek());
         assertEquals(1, stack.size());
     }
 
     @Test
     public void testToString() throws Exception {
-        DieToken toke = new DieToken(new IntegerToken(5), 20);
-        assertEquals("5d20", toke.toString());
+        DieToken toke = new DieToken(20);
+        assertEquals("d20", toke.toString());
     }
 }

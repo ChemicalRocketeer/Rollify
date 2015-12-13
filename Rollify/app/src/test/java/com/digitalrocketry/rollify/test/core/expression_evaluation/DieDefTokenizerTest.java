@@ -36,10 +36,10 @@ public class DieDefTokenizerTest {
     public void testTokenizeFudgeDice() throws Exception {
         TokenizationContext context = new TokenizationContext("df", Collections.singletonList(toke));
         List<Token> results = context.tokenize();
-        assertEquals("1(1d3 2 -)", ExpressionUtils.toString(results));
+        assertEquals("(d3 2 -)", ExpressionUtils.toString(results));
         context = new TokenizationContext("3df", Arrays.asList(toke, new IntegerTokenizer()));
         results = context.tokenize();
-        assertEquals("3(1d3 2 -)", ExpressionUtils.toString(results));
+        assertEquals("3 (d3 2 -)", ExpressionUtils.toString(results));
     }
 
     @Test
@@ -60,7 +60,7 @@ public class DieDefTokenizerTest {
         TokenizationContext context = new TokenizationContext(new StringScanner(""), tokenizerList);
         StringScanner steve = new StringScanner("d20xxxxxx");
         toke.tryTokenize(context, steve);
-        assertEquals("1d20", context.getLastToken().toString());
+        assertEquals("d20", context.getLastToken().toString());
         assertEquals(3, steve.getCursor());
     }
 
@@ -71,7 +71,7 @@ public class DieDefTokenizerTest {
         context.pushToOutput(new IntegerToken(10));
         StringScanner steve = new StringScanner("d20xxxxxx");
         toke.tryTokenize(context, steve);
-        assertEquals("10d20", context.getLastToken().toString());
+        assertEquals("10 d20", context.getLastToken().toString());
         assertEquals(3, steve.getCursor());
     }
 
@@ -82,7 +82,7 @@ public class DieDefTokenizerTest {
         context.pushToOutput(new IntegerToken(-10));
         StringScanner steve = new StringScanner("d20xxxxxx");
         toke.tryTokenize(context, steve);
-        assertEquals("-10d20", context.getLastToken().toString());
+        assertEquals("-10 d20", context.getLastToken().toString());
         assertEquals(3, steve.getCursor());
     }
 }

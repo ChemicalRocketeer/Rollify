@@ -2,6 +2,7 @@ package com.digitalrocketry.rollify.core.expression_evaluation.tokenization;
 
 import com.digitalrocketry.rollify.core.expression_evaluation.ExpressionUtils;
 import com.digitalrocketry.rollify.core.expression_evaluation.InvalidExpressionException;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.MultiplierToken;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Operator;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Token;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokens.TokenGroup;
@@ -25,7 +26,7 @@ public class ParenTokenizer implements Tokenizer {
             sc.next();
             // push tokens to the output and stack so we can find the open paren when we hit
             // the close paren
-            Token multiplier = ExpressionUtils.findCoefficientToken(context);
+            Token multiplier = context.tryFindCoefficientToken();
             ParenControlToken parenToken = new ParenControlToken(multiplier);
             context.pushToOutput(parenToken);
             context.pushToStack(parenToken);
@@ -53,7 +54,11 @@ public class ParenTokenizer implements Tokenizer {
             }
             ParenControlToken parenToken = (ParenControlToken) context.popStack(); // remove paren token
 
-            context.pushToOutput(new TokenGroup(parenToken.coefficient, contents));
+            Token toke = new TokenGroup(contents);
+            if (parenToken.coefficient != null) {
+                toke = new MultiplierToken(parenToken.coefficient, toke);
+            }
+            context.pushToOutput(toke);
             return true;
         } else {
             return false;

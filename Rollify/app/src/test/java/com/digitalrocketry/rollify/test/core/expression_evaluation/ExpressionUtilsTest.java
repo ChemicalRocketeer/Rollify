@@ -23,22 +23,23 @@ public class ExpressionUtilsTest {
     public void testFindMultiplierToken() throws Exception {
         TokenizationContext context = new TokenizationContext(new StringScanner(""), new ArrayList<Tokenizer>());
         context.pushToOutput(new IntegerToken(42));
-        Token multiplier = ExpressionUtils.findCoefficientToken(context);
+        Token multiplier = context.tryFindCoefficientToken();
+        assertNotEquals(null, multiplier);
         assertEquals("42", multiplier.toString());
     }
 
     @Test
     public void testFindMultiplierTokenWithoutMultiplier() throws Exception {
         TokenizationContext context = new TokenizationContext(new StringScanner(""), new ArrayList<Tokenizer>());
-        Token multiplier = ExpressionUtils.findCoefficientToken(context);
-        assertEquals("1", multiplier.toString());
+        Token multiplier = context.tryFindCoefficientToken();
+        assertEquals(null, multiplier);
     }
 
     @Test
     public void testFindMultiplierTokenWithNonNumber() throws Exception {
         TokenizationContext context = new TokenizationContext(new StringScanner(""), new ArrayList<Tokenizer>());
         context.pushToStack(Operator.ADD);
-        Token multiplier = ExpressionUtils.findCoefficientToken(context);
-        assertEquals("1", multiplier.toString());
+        Token multiplier = context.tryFindCoefficientToken();
+        assertEquals(null, multiplier);
     }
 }

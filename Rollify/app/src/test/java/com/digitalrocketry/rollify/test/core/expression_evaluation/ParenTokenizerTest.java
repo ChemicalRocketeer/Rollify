@@ -68,7 +68,7 @@ public class ParenTokenizerTest {
         assertEquals("(", context.getLastToken().toString());
         assertEquals(1, steve.getCursor());
         toke.tryTokenize(context, steve);
-        assertEquals("1()", context.getLastToken().toString());
+        assertEquals("()", context.getLastToken().toString());
         assertEquals(2, steve.getCursor());
     }
 
@@ -82,7 +82,7 @@ public class ParenTokenizerTest {
         assertEquals("(", context.getLastToken().toString());
         assertEquals(1, steve.getCursor());
         toke.tryTokenize(context, steve);
-        assertEquals("200()", context.getLastToken().toString());
+        assertEquals("200 ()", context.getLastToken().toString());
         assertEquals(2, steve.getCursor());
     }
 
@@ -99,10 +99,10 @@ public class ParenTokenizerTest {
         assertEquals("(", context.getLastToken().toString());
         assertEquals(2, steve.getCursor());
         toke.tryTokenize(context, steve);
-        assertEquals("1()", context.getLastToken().toString());
+        assertEquals("()", context.getLastToken().toString());
         assertEquals(3, steve.getCursor());
         toke.tryTokenize(context, steve);
-        assertEquals("2(1())", context.getLastToken().toString());
+        assertEquals("2 (())", context.getLastToken().toString());
         assertEquals(4, steve.getCursor());
     }
 }

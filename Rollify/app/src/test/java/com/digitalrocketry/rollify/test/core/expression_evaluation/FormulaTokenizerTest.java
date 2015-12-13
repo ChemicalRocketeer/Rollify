@@ -62,7 +62,7 @@ public class FormulaTokenizerTest {
         assertFalse(s.hasNext());
         assertEquals(1, results.size());
         assertTrue(results.get(0) instanceof TokenGroup);
-        assertEquals("1(1 1 +)", results.get(0).toString());
+        assertEquals("(1 1 +)", results.get(0).toString());
     }
 
     @Test

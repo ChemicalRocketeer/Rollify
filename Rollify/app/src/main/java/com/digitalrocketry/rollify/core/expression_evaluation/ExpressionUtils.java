@@ -40,22 +40,6 @@ public class ExpressionUtils {
     }
 
     /**
-     * If your token can take a coefficient (e.g. 3x where 3 is the coefficient) then this method
-     * will look for a suitable token, and pop it out of the context and return it for you to use.
-     * If there is no suitable token (if the last token was not a number) then it will return null.
-     *
-     * @param context the TokenizationContext to find a coefficient from
-     * @return the coefficient, or null
-     */
-    public static Token tryFindCoefficientToken(TokenizationContext context) {
-        if (context.lastTokenWasNumber()) {
-            return context.popOutput();
-        } else {
-            return null;
-        }
-    }
-
-    /**
      * @param tokens a list of Tokens
      * @return true if one of the tokens is a variable that can have a random value (like a DieToken)
      */

@@ -38,7 +38,7 @@ public class DieDefTokenizer implements Tokenizer {
             throws  InvalidExpressionException {
         if (sc.next() == 'd') {
             sc.skipWhitespace();
-            Token dieCount = ExpressionUtils.tryFindCoefficientToken(context);
+            Token dieCount = context.tryFindCoefficientToken();
             Token dieToken = findDieType(sc);
             if (dieCount != null) {
                 // there is a dieCount, so we need to wrap the dieToken in a MultiplierToken

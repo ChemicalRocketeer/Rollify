@@ -171,6 +171,21 @@ public class TokenizationContext {
     }
 
     /**
+     * If your token can take a coefficient (e.g. 3x where 3 is the coefficient) then this method
+     * will look for a suitable token, and pop it out of the context and return it for you to use.
+     * If there is no suitable token (if the last token was not a number) then it will return null.
+     *
+     * @return the coefficient, or null
+     */
+    public Token tryFindCoefficientToken() {
+        if (lastTokenWasNumber()) {
+            return popOutput();
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * @return whether the last token was a number. This performs null checks, while getLastToken() doesn't
      */
     public boolean lastTokenWasNumber() {

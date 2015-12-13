@@ -2,6 +2,7 @@ package com.digitalrocketry.rollify.core.expression_evaluation.tokenization;
 
 import com.digitalrocketry.rollify.core.expression_evaluation.ExpressionUtils;
 import com.digitalrocketry.rollify.core.expression_evaluation.InvalidExpressionException;
+import com.digitalrocketry.rollify.core.expression_evaluation.tokens.MultiplierToken;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokens.Token;
 import com.digitalrocketry.rollify.core.expression_evaluation.tokens.TokenGroup;
 import com.digitalrocketry.rollify.db.Formula;
@@ -59,13 +60,16 @@ public class FormulaTokenizer implements Tokenizer {
             Formula f = formulaProvider.getFormula(formulaName);
             if (f != null) {
                 // we have found a valid formula! Time to process it!
-                if (nestedFormulas.contains(formulaName))
+                if (nestedFormulas.contains(formulaName)) {
                     invalidExpression(SELF_REFERENTIAL_FORMULA_MSG + ": " + formulaName);
-                Token coefficient = ExpressionUtils.findCoefficientToken(context);
+                }
+                Token coefficient = context.tryFindCoefficientToken();
                 nestedFormulas.push(formulaName);
                 try {
-                    TokenGroup expr = new TokenGroup(coefficient,
-                            new TokenizationContext(f.getExpression(), context).tokenize());
+                    Token expr = new TokenGroup(new TokenizationContext(f.getExpression(), context).tokenize());
+                    if (coefficient != null) {
+                        expr = new MultiplierToken(coefficient, expr);
+                    }
                     context.pushToOutput(expr);
                 } catch (Exception e) {
                     nestedFormulas.pop();
