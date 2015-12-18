@@ -25,6 +25,8 @@ public class FormulaDetailsActivity extends Activity {
     public static final String NAME_MESSAGE = "formulaName";
     public static final String EXPRESSION_MESSAGE = "formulaExpression";
 
+    static final int REQUEST_EDIT_EXPRESSION = 1;
+
     private Formula formula = null;
     private TextView nameView, expressionView;
 
@@ -55,6 +57,28 @@ public class FormulaDetailsActivity extends Activity {
         if (name != null) {
             nameView.setText(name);
         }
+
+        expressionView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startExpressionEditingActivity();
+            }
+        });
+    }
+
+    public void startExpressionEditingActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setAction(MainActivity.ACTION_EDIT_EXPRESSION);
+        intent.putExtra(MainActivity.EXTRA_EXPRESSION, expressionView.getText());
+        startActivityForResult(intent, REQUEST_EDIT_EXPRESSION);
+    }
+
+    @Override
+    protected  void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_EDIT_EXPRESSION && resultCode == RESULT_OK) {
+            CharSequence expression = data.getCharSequenceExtra(MainActivity.EXTRA_EXPRESSION);
+            expressionView.setText(expression);
+        }
     }
 
     public void save(View v) {
@@ -68,15 +92,11 @@ public class FormulaDetailsActivity extends Activity {
         formula.setName(nameView.getText().toString());
         formula.save();
 
-        Log.i("Rollify", "formula saved");
+        Log.i("Rollify", "formula " + formula.getName() + " saved");
         finish();
     }
 
     public void cancel(View v) {
-        finish();
-    }
-
-    public void cancel() {
         finish();
     }
 }

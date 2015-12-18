@@ -39,6 +39,10 @@ public class CalculatorDisplayFragment extends Fragment implements FormulaListFr
         displayText.setText(text);
     }
 
+    public void setEditorText(String text) {
+        expressionEditor.setText(text);
+    }
+
     public String getEditorText() {
         return expressionEditor.getText().toString();
     }

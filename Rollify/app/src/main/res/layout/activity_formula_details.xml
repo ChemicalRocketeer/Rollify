@@ -31,11 +31,14 @@
         android:text="Expression:"
         android:id="@+id/textView2" />
 
-    <EditText
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/formulaExpressionEdit"
-        android:hint="" />
+        android:hint="enter expression here"
+        style="@android:style/Widget.EditText" >
+        <requestFocus/>
+    </TextView>
 
     <LinearLayout
         android:orientation="horizontal"
