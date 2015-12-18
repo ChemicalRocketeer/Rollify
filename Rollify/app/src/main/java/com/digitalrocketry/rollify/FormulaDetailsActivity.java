@@ -57,13 +57,6 @@ public class FormulaDetailsActivity extends Activity {
         if (name != null) {
             nameView.setText(name);
         }
-
-        expressionView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startExpressionEditingActivity();
-            }
-        });
     }
 
     public void startExpressionEditingActivity() {
@@ -71,6 +64,10 @@ public class FormulaDetailsActivity extends Activity {
         intent.setAction(MainActivity.ACTION_EDIT_EXPRESSION);
         intent.putExtra(MainActivity.EXTRA_EXPRESSION, expressionView.getText());
         startActivityForResult(intent, REQUEST_EDIT_EXPRESSION);
+    }
+
+    public void onFormulaExpressionEditClicked(View v) {
+        startExpressionEditingActivity();
     }
 
     @Override

@@ -35,9 +35,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/formulaExpressionEdit"
-        android:hint="enter expression here"
+        android:hint="@string/expressionEditHint"
+        android:focusable="false"
+        android:clickable="true"
+        android:onClick="onFormulaExpressionEditClicked"
         style="@android:style/Widget.EditText" >
-        <requestFocus/>
     </TextView>
 
     <LinearLayout
