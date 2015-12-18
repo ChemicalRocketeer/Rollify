@@ -2,6 +2,8 @@ package com.digitalrocketry.rollify;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,8 +12,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.digitalrocketry.rollify.tasks.EvaluationTask;
+
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -77,14 +83,27 @@ public class MainActivity extends AppCompatActivity implements EvaluationTask.Li
 
         formulaListPager = (ViewPager) findViewById(R.id.formula_view_pager);
 
+        Button equalsButton = (Button) findViewById(R.id.calcButtonEquals);
+        ImageButton doneButton = (ImageButton) findViewById(R.id.calcButtonDone);
         Intent intent = getIntent();
         if (intent.getAction().equals(ACTION_EDIT_EXPRESSION)) {
             // we are editing an expression and should return an expression string to the calling activity
             mode = MODE.EDITING_EXPRESSION;
             originalExpression = intent.getStringExtra(EXTRA_EXPRESSION);
             calcDisplay.setEditorText(originalExpression);
+            equalsButton.setVisibility(View.GONE);
+            doneButton.setVisibility(View.VISIBLE);
+            /*
+            submitButton.setText("");
+            Drawable doneImage = ContextCompat.getDrawable(this, R.drawable.ic_done_white_24dp);
+            doneImage.setBounds(0, 0, 100, 100);
+            int padding = submitButton.getHeight() / 2;
+            equalsButton.setCompoundDrawables(null, doneImage, null, null);
+            */
         } else {
             mode = MODE.MAIN;
+            doneButton.setVisibility(View.GONE);
+            equalsButton.setVisibility(View.VISIBLE);
         }
     }
 
@@ -134,25 +153,17 @@ public class MainActivity extends AppCompatActivity implements EvaluationTask.Li
         }
     }
 
-    public void evaluateExpressionAndDisplay() {
+    public void onCalcEqualsButtonPressed(View view) {
         String expression = calcDisplay.getEditorText();
         new EvaluationTask().addListener(this).execute(expression);
     }
 
-    public void returnExpressionToPreviousActivity() {
+    public void onCalcDoneButtonPressed(View view) {
         String expression = calcDisplay.getEditorText();
         Intent intent = new Intent();
         intent.putExtra(EXTRA_EXPRESSION, expression);
         setResult(RESULT_OK, intent);
         finish();
-    }
-
-    public void onCalcEqualsButtonPressed(View view) {
-        if (mode == MODE.EDITING_EXPRESSION) {
-            returnExpressionToPreviousActivity();
-        } else {
-            evaluateExpressionAndDisplay();
-        }
     }
 
     @Override

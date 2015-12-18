@@ -301,23 +301,40 @@
             android:textSize="@dimen/calcOperatorButtonTextSize"
             android:background="@color/operatorBackground" />
 
-        <Button
-            style="@style/CalcButtonGrid"
+        <RelativeLayout
             app:layout_rowWeight="1"
             app:layout_columnWeight="1"
             app:layout_row="4"
             app:layout_column="4"
+            app:layout_rowSpan="2"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:text="="
-            android:id="@+id/calcButtonEquals"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:singleLine="false"
-            android:onClick="onCalcEqualsButtonPressed"
-            app:layout_rowSpan="2"
-            android:nestedScrollingEnabled="true"
-            android:textSize="@dimen/calcEqualsButtonTextSize"
-            android:background="@color/operatorBackground" />
+            android:background="@color/operatorBackground" >
+
+            <Button
+                style="@style/CalcButtonGrid"
+                android:text="="
+                android:id="@+id/calcButtonEquals"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:singleLine="false"
+                android:onClick="onCalcEqualsButtonPressed"
+                android:nestedScrollingEnabled="true"
+                android:textSize="@dimen/calcEqualsButtonTextSize"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#00000000"/>
+
+            <ImageButton
+                android:id="@+id/calcButtonDone"
+                android:src="@drawable/ic_done_white_24dp"
+                android:onClick="onCalcDoneButtonPressed"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="#00000000"/>
+
+        </RelativeLayout>
 
         <Button
             style="@style/CalcButtonGrid"
