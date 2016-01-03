@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +17,10 @@ public class CalculatorDisplayFragment extends Fragment implements FormulaListFr
 
     TextView displayText;
     EditText expressionEditor;
+    View backspaceButton;
 
     public CalculatorDisplayFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -32,6 +29,14 @@ public class CalculatorDisplayFragment extends Fragment implements FormulaListFr
         View layout = inflater.inflate(R.layout.fragment_calculator_display, container, false);
         expressionEditor = (EditText) layout.findViewById(R.id.calcExpressionEdit);
         displayText = (TextView) layout.findViewById(R.id.calcExpressionDisplay);
+        backspaceButton = layout.findViewById(R.id.backspaceButton);
+        backspaceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backspaceAtCursor();
+            }
+        });
+        updateBackspaceVisibility();
         return layout;
     }
 
@@ -41,6 +46,7 @@ public class CalculatorDisplayFragment extends Fragment implements FormulaListFr
 
     public void setEditorText(String text) {
         expressionEditor.setText(text);
+        updateBackspaceVisibility();
     }
 
     public String getEditorText() {
@@ -50,7 +56,9 @@ public class CalculatorDisplayFragment extends Fragment implements FormulaListFr
     public void insertTextAtCursor(String text) {
         int start = Math.max(expressionEditor.getSelectionStart(), 0);
         int end = Math.max(expressionEditor.getSelectionEnd(), 0);
-        expressionEditor.getEditableText().replace(Math.min(start, end), Math.max(start, end), text);
+        Editable editable = expressionEditor.getEditableText();
+        editable.replace(Math.min(start, end), Math.max(start, end), text);
+        updateBackspaceVisibility();
     }
 
     public void backspaceAtCursor() {
@@ -64,10 +72,20 @@ public class CalculatorDisplayFragment extends Fragment implements FormulaListFr
         }
         expressionEditor.getEditableText().delete(start, end);
         expressionEditor.setSelection(start, start);
+        updateBackspaceVisibility();
     }
 
     public void clearExpression() {
         expressionEditor.getEditableText().clear();
+        updateBackspaceVisibility();
+    }
+
+    private void updateBackspaceVisibility() {
+        if (expressionEditor.length() > 0) {
+            backspaceButton.setVisibility(View.VISIBLE);
+        } else {
+            backspaceButton.setVisibility(View.GONE);
+        }
     }
 
     @Override
