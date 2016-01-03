@@ -131,10 +131,6 @@ public class MainActivity extends AppCompatActivity implements EvaluationTask.Li
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
-            case R.id.action_backspace:
-                Log.i("Rollify menu", "backspace pressed");
-                calcDisplay.backspaceAtCursor();
-                return true;
             case R.id.add_formula:
                 Log.i("Rollify menu", "add formula pressed");
                 Intent intent = new Intent(this, FormulaDetailsActivity.class);
