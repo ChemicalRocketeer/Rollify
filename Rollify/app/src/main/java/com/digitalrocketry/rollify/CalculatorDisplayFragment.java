@@ -18,7 +18,7 @@ import java.util.Stack;
 public class CalculatorDisplayFragment extends Fragment implements FormulaListFragment.FormulaUser {
 
     TextView displayText;
-    EditText expressionEditor;
+    TextView expressionEditor;
     View backspaceButton;
     Stack<String> backspaceStack;
 
@@ -41,7 +41,7 @@ public class CalculatorDisplayFragment extends Fragment implements FormulaListFr
 
             Runnable action = new Runnable() {
                 @Override public void run() {
-                    backspaceAtCursor();
+                    backspace();
                     handler.postDelayed(this, delay);
                 }
             };
@@ -50,7 +50,7 @@ public class CalculatorDisplayFragment extends Fragment implements FormulaListFr
                 switch(event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         if (handler != null) return true;
-                        backspaceAtCursor();
+                        backspace();
                         handler = new Handler();
                         handler.postDelayed(action, initialDelay);
                         break;
@@ -84,9 +84,6 @@ public class CalculatorDisplayFragment extends Fragment implements FormulaListFr
     public void setEditorText(String text) {
         expressionEditor.setText(text);
         backspaceStack.clear();
-        if (expressionEditor.length() != 0) {
-            backspaceStack.push(text);
-        }
         updateBackspaceVisibility();
     }
 
@@ -97,23 +94,24 @@ public class CalculatorDisplayFragment extends Fragment implements FormulaListFr
     public void insertTextAtCursor(String text) {
         int start = Math.max(expressionEditor.getSelectionStart(), 0);
         int end = Math.max(expressionEditor.getSelectionEnd(), 0);
-        Editable editable = expressionEditor.getEditableText();
-        editable.replace(Math.min(start, end), Math.max(start, end), text);
+        expressionEditor.getEditableText().replace(Math.min(start, end), Math.max(start, end), text);
+        if (isNumber(text)) {
+            StringBuilder steve = new StringBuilder(text);
+            while (!backspaceStack.empty() && isNumber(backspaceStack.peek())) {
+                steve.insert(0, backspaceStack.pop());
+            }
+            text = steve.toString();
+        }
         backspaceStack.push(text);
         updateBackspaceVisibility();
     }
 
-    public void backspaceAtCursor() {
-        int pos1 = Math.max(expressionEditor.getSelectionStart(), 0);
-        int pos2 = Math.max(expressionEditor.getSelectionEnd(), 0);
-        int start = Math.min(pos1, pos2);
-        int end = Math.max(pos1, pos2);
-        if (start == end && start > 0) {
-            // the cursor is only at one position, so we move start back to make a selection
-            start --;
-        }
+    public void backspace() {
+        int end = expressionEditor.length();
+        int wordLength = backspaceStack.empty() ? 1 : backspaceStack.pop().length();
+        int start = end - wordLength;
+        start = Math.max(start, 0);
         expressionEditor.getEditableText().delete(start, end);
-        expressionEditor.setSelection(start, start);
         updateBackspaceVisibility();
     }
 
@@ -129,6 +127,14 @@ public class CalculatorDisplayFragment extends Fragment implements FormulaListFr
         } else {
             backspaceButton.setVisibility(View.GONE);
         }
+    }
+
+    private boolean isNumber(String s) {
+        for (int i = 0; i < s.length(); i++) {
+            if (!Character.isDigit(s.charAt(i)))
+                return false;
+        }
+        return true;
     }
 
     @Override
