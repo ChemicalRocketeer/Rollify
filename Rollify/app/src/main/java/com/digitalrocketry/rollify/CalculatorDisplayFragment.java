@@ -1,11 +1,11 @@
 package com.digitalrocketry.rollify;
 
-import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Handler;
 import android.text.Editable;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -35,6 +35,42 @@ public class CalculatorDisplayFragment extends Fragment implements FormulaListFr
             public void onClick(View v) {
                 backspaceAtCursor();
             }
+        });
+        backspaceButton.setOnTouchListener(new View.OnTouchListener() {
+
+            Handler handler;
+            int delay = 300;
+            int initialDelay = 800;
+
+            Runnable action = new Runnable() {
+                @Override public void run() {
+                    backspaceAtCursor();
+                    handler.postDelayed(this, delay);
+                }
+            };
+
+            @Override public boolean onTouch(View v, MotionEvent event) {
+                switch(event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        if (handler != null) return true;
+                        backspaceAtCursor();
+                        handler = new Handler();
+                        handler.postDelayed(action, initialDelay);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if (handler == null) return true;
+                        handler.removeCallbacks(action);
+                        handler = null;
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        if (handler == null) return true;
+                        handler.removeCallbacks(action);
+                        handler = null;
+                        break;
+                }
+                return false;
+            }
+
         });
         updateBackspaceVisibility();
         return layout;
