@@ -13,11 +13,14 @@ import android.widget.TextView;
 
 import com.digitalrocketry.rollify.db.Formula;
 
+import java.util.Stack;
+
 public class CalculatorDisplayFragment extends Fragment implements FormulaListFragment.FormulaUser {
 
     TextView displayText;
     EditText expressionEditor;
     View backspaceButton;
+    Stack<String> backspaceStack;
 
     public CalculatorDisplayFragment() {
         // Required empty public constructor
@@ -30,12 +33,6 @@ public class CalculatorDisplayFragment extends Fragment implements FormulaListFr
         expressionEditor = (EditText) layout.findViewById(R.id.calcExpressionEdit);
         displayText = (TextView) layout.findViewById(R.id.calcExpressionDisplay);
         backspaceButton = layout.findViewById(R.id.backspaceButton);
-        backspaceButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                backspaceAtCursor();
-            }
-        });
         backspaceButton.setOnTouchListener(new View.OnTouchListener() {
 
             Handler handler;
@@ -73,6 +70,10 @@ public class CalculatorDisplayFragment extends Fragment implements FormulaListFr
 
         });
         updateBackspaceVisibility();
+        backspaceStack = new Stack<>();
+        if (expressionEditor.length() != 0) {
+            backspaceStack.push(getEditorText());
+        }
         return layout;
     }
 
@@ -82,6 +83,10 @@ public class CalculatorDisplayFragment extends Fragment implements FormulaListFr
 
     public void setEditorText(String text) {
         expressionEditor.setText(text);
+        backspaceStack.clear();
+        if (expressionEditor.length() != 0) {
+            backspaceStack.push(text);
+        }
         updateBackspaceVisibility();
     }
 
@@ -94,6 +99,7 @@ public class CalculatorDisplayFragment extends Fragment implements FormulaListFr
         int end = Math.max(expressionEditor.getSelectionEnd(), 0);
         Editable editable = expressionEditor.getEditableText();
         editable.replace(Math.min(start, end), Math.max(start, end), text);
+        backspaceStack.push(text);
         updateBackspaceVisibility();
     }
 
@@ -113,6 +119,7 @@ public class CalculatorDisplayFragment extends Fragment implements FormulaListFr
 
     public void clearExpression() {
         expressionEditor.getEditableText().clear();
+        backspaceStack.clear();
         updateBackspaceVisibility();
     }
 
