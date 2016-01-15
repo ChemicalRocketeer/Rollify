@@ -3,7 +3,6 @@ package com.digitalrocketry.rollify;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,10 +13,69 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.digitalrocketry.rollify.db.Formula;
+import com.digitalrocketry.rollify.utils.Range;
 
 import java.util.Stack;
 
 public class CalculatorDisplayFragment extends Fragment implements FormulaListFragment.FormulaUser {
+
+    class BackspaceListener implements View.OnTouchListener {
+
+        Handler handler;
+        int delay = 400;
+        int initialDelay = 800;
+        Stack<String> backspaceHistory = new Stack<>();
+
+        Runnable action = new Runnable() {
+            @Override
+            public void run() {
+                smartBackspace();
+                handler.postDelayed(this, delay);
+            }
+        };
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    if (handler != null) return true;
+                    backspaceHistory.push(backspace());
+                    handler = new Handler();
+                    handler.postDelayed(action, initialDelay);
+                    break;
+                case MotionEvent.ACTION_UP:
+                    if (handler == null) return true;
+                    handler.removeCallbacks(action);
+                    handler = null;
+                    backspaceHistory.clear();
+                    break;
+            }
+            return false;
+        }
+
+        public void smartBackspace() {
+            int start, end;
+            int pos1 = Math.max(expressionEditor.getSelectionStart(), 0);
+            int pos2 = Math.max(expressionEditor.getSelectionEnd(), 0);
+            Log.i("cursor", "pos1: " + pos1 + " pos2: " + pos2);
+            String text = getEditorText();
+            if (pos1 != pos2) {
+                // there is an existing selection
+                start = Math.min(pos1, pos2);
+                end = Math.max(pos1, pos2);
+            } else {
+                // there is no selection, we will figure out what to delete
+                Range range = findSmartBackspaceRange(text, pos1);
+                start = range.min;
+                end = range.max + 1;
+            }
+            backspaceStack.push(text.substring(start, end));
+            expressionEditor.getEditableText().delete(start, end);
+            updateBackspaceVisibility();
+        }
+
+
+    }
 
     TextView displayText;
     EditText expressionEditor;
@@ -35,99 +93,8 @@ public class CalculatorDisplayFragment extends Fragment implements FormulaListFr
         expressionEditor = (EditText) layout.findViewById(R.id.calcExpressionEdit);
         displayText = (TextView) layout.findViewById(R.id.calcExpressionDisplay);
         backspaceButton = layout.findViewById(R.id.backspaceButton);
-        backspaceButton.setOnTouchListener(new View.OnTouchListener() {
+        backspaceButton.setOnTouchListener(new BackspaceListener());
 
-            Handler handler;
-            int delay = 400;
-            int initialDelay = 800;
-            Stack<String> backspaceHistory = new Stack<>();
-
-            Runnable action = new Runnable() {
-                @Override
-                public void run() {
-                    smartBackspace();
-                    handler.postDelayed(this, delay);
-                }
-            };
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        if (handler != null) return true;
-                        backspaceHistory.push(backspace());
-                        handler = new Handler();
-                        handler.postDelayed(action, initialDelay);
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        if (handler == null) return true;
-                        handler.removeCallbacks(action);
-                        handler = null;
-                        backspaceHistory.clear();
-                        break;
-                }
-                return false;
-            }
-
-            public void smartBackspace() {
-                int start, end;
-                int pos1 = Math.max(expressionEditor.getSelectionStart(), 0);
-                int pos2 = Math.max(expressionEditor.getSelectionEnd(), 0);
-                Log.i("cursor", "pos1: " + pos1 + " pos2: " + pos2);
-                String text = getEditorText();
-                if (pos1 != pos2) {
-                    // there is an existing selection
-                    start = Math.min(pos1, pos2);
-                    end = Math.max(pos1, pos2);
-                } else {
-                    // there is no selection, we will figure out what to delete
-                    end = pos1;
-                    if (end == 0) return; // nothing to delete, cursor is at zero
-                    start = end - 1; // by default only one character will be deleted
-                    char startChar = text.charAt(start);
-                    if (Character.isDigit(startChar)) {
-                        // the current character is part of a number and we should delete the number
-                        while (end < text.length() && Character.isDigit(text.charAt(end))) {
-                            end++;
-                        }
-                        while (start > 0 && Character.isDigit(text.charAt(start - 1))) {
-                            start--;
-                        }
-                    } else if (startChar == ']'
-                            || (!backspaceStack.empty() && backspaceStack.peek().contains("]"))) {
-                        // the character is a closing formula bracket and we should delete the formula
-                        // first we look for an opening bracket
-                        int i = start;
-                        while (i >= 0) {
-                            // if we find an opening bracket, we set the start to point at it. If not,
-                            // start is unchanged.
-                            if (text.charAt(i) == '[') {
-                                start = i;
-                                break;
-                            }
-                            i--;
-                        }
-                    } else if (startChar == '[') {
-                        // the character is an opening formula bracket and we should delete the formula
-                        // first we look for a closing bracket
-                        int i = end;
-                        while (i < text.length()) {
-                            // if we find a closing bracket, we set the start to point at it. If not,
-                            // start is unchanged.
-                            if (text.charAt(i) == ']') {
-                                end = i;
-                                break;
-                            }
-                            i++;
-                        }
-                    }
-                }
-                backspaceStack.push(text.substring(start, end));
-                expressionEditor.getEditableText().delete(start, end);
-                updateBackspaceVisibility();
-            }
-
-        });
         updateBackspaceVisibility();
         backspaceStack = new Stack<>();
         if (expressionEditor.length() != 0) {
@@ -185,6 +152,55 @@ public class CalculatorDisplayFragment extends Fragment implements FormulaListFr
         expressionEditor.setSelection(start, start);
         updateBackspaceVisibility();
         return deletedText;
+    }
+
+    /**
+     * @param text the text in question
+     * @param cursorIndex the index of the character after the cursor
+     * @return a range of character indices to delete, inclusive,
+     * or null if there is nothing to delete
+     */
+    public static Range findSmartBackspaceRange(String text, int cursorIndex) {
+        if (cursorIndex <= 0 || cursorIndex > text.length()) return null; // nothing to delete
+        int start, end;
+        end = start = cursorIndex - 1; // by default only one character will be deleted
+        char startChar = text.charAt(start);
+        if (Character.isDigit(startChar)) {
+            // the current character is part of a number and we should delete the entire number
+            while (end < text.length() - 1 && Character.isDigit(text.charAt(end + 1))) {
+                end++;
+            }
+            while (start > 0 && Character.isDigit(text.charAt(start - 1))) {
+                start--;
+            }
+        } else if (startChar == ']') {
+            // the character is a closing formula bracket and we should delete the formula
+            // first we look for an opening bracket
+            int i = start;
+            while (i >= 0) {
+                // if we find an opening bracket, we set the start to point at it. If not,
+                // start is unchanged.
+                if (text.charAt(i) == '[') {
+                    start = i;
+                    break;
+                }
+                i--;
+            }
+        } else if (startChar == '[') {
+            // the character is an opening formula bracket and we should delete the formula
+            // first we look for a closing bracket
+            int i = end;
+            while (i < text.length()) {
+                // if we find a closing bracket, we set the end to point at it. If not,
+                // end is unchanged.
+                if (text.charAt(i) == ']') {
+                    end = i;
+                    break;
+                }
+                i++;
+            }
+        }
+        return new Range(start, end);
     }
 
     public void clearExpression() {
