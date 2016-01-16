@@ -3,7 +3,6 @@ package com.digitalrocketry.rollify;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.Handler;
-import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -22,7 +21,7 @@ public class CalculatorDisplayFragment extends Fragment implements FormulaListFr
     class BackspaceListener implements View.OnTouchListener {
 
         Handler handler;
-        int delay = 400;
+        int delay = 500;
         int initialDelay = 800;
         Stack<String> backspaceHistory = new Stack<>();
 
@@ -65,9 +64,13 @@ public class CalculatorDisplayFragment extends Fragment implements FormulaListFr
                 end = Math.max(pos1, pos2);
             } else {
                 // there is no selection, we will figure out what to delete
-                Range range = findSmartBackspaceRange(text, pos1);
-                start = range.min;
-                end = range.max + 1;
+                Range range = smartBackspaceRange(text, pos1, backspaceStack);
+                if (range != null) {
+                    start = range.min;
+                    end = range.max + 1;
+                } else {
+                    start = end = 0;
+                }
             }
             backspaceStack.push(text.substring(start, end));
             expressionEditor.getEditableText().delete(start, end);
@@ -160,8 +163,11 @@ public class CalculatorDisplayFragment extends Fragment implements FormulaListFr
      * @return a range of character indices to delete, inclusive,
      * or null if there is nothing to delete
      */
-    public static Range findSmartBackspaceRange(String text, int cursorIndex) {
+    public static Range smartBackspaceRange(String text,
+                                            int cursorIndex,
+                                            Stack<String> previouslyDeleted) {
         if (cursorIndex <= 0 || cursorIndex > text.length()) return null; // nothing to delete
+        String lastText = previouslyDeleted == null ? "" : previouslyDeleted.peek();
         int start, end;
         end = start = cursorIndex - 1; // by default only one character will be deleted
         char startChar = text.charAt(start);
@@ -176,31 +182,61 @@ public class CalculatorDisplayFragment extends Fragment implements FormulaListFr
         } else if (startChar == ']') {
             // the character is a closing formula bracket and we should delete the formula
             // first we look for an opening bracket
-            int i = start;
-            while (i >= 0) {
+            for (int i = start; i >= 0; i--) {
                 // if we find an opening bracket, we set the start to point at it. If not,
                 // start is unchanged.
                 if (text.charAt(i) == '[') {
                     start = i;
                     break;
                 }
-                i--;
             }
         } else if (startChar == '[') {
             // the character is an opening formula bracket and we should delete the formula
             // first we look for a closing bracket
-            int i = end;
-            while (i < text.length()) {
+            for (int i = end; i < text.length(); i++) {
                 // if we find a closing bracket, we set the end to point at it. If not,
                 // end is unchanged.
                 if (text.charAt(i) == ']') {
                     end = i;
                     break;
                 }
-                i++;
+            }
+        } else if (textContainsXBeforeY(lastText, "]", "[")) {
+            // try to see if we are inside some brackets, one of which was deleted before.
+            // If, when searching for an opening bracket, we find a closing bracket, it means we
+            // have run into another formula definition and should quit looking
+            for (int i = start; i > 0 && text.charAt(i) != ']'; i--) {
+                if (text.charAt(i) == '[') {
+                    start = i;
+                    break;
+                }
+            }
+        } else {
+            // try to see if we are inside some brackets
+            for (int i = start; i >= 0; i--) {
+                // first we look for an opening bracket
+                if (text.charAt(i) == '[') {
+                    // if we find one, we search for a closing bracket
+                    for (int j = end; j < text.length(); j++) {
+                        if (text.charAt(j) == ']') {
+                            // if we find both opening and closing brackets,
+                            // we set the start and end accordingly
+                            start = i;
+                            end = j;
+                            break;
+                        }
+                    }
+                    break;
+                }
             }
         }
         return new Range(start, end);
+    }
+
+    private static boolean textContainsXBeforeY(String text, String x, String y) {
+        int ix = text.indexOf(x);
+        int iy = text.indexOf(y);
+        return ix != -1 && (ix < text.indexOf(y) || iy == -1);
     }
 
     public void clearExpression() {
