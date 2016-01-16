@@ -31,11 +31,16 @@
         android:text="Expression:"
         android:id="@+id/textView2" />
 
-    <EditText
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/formulaExpressionEdit"
-        android:hint="" />
+        android:hint="@string/expressionEditHint"
+        android:focusable="false"
+        android:clickable="true"
+        android:onClick="onFormulaExpressionEditClicked"
+        style="@android:style/Widget.EditText" >
+    </TextView>
 
     <LinearLayout
         android:orientation="horizontal"
