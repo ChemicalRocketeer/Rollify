@@ -167,7 +167,12 @@ public class CalculatorDisplayFragment extends Fragment implements FormulaListFr
                                             int cursorIndex,
                                             Stack<String> previouslyDeleted) {
         if (cursorIndex <= 0 || cursorIndex > text.length()) return null; // nothing to delete
-        String lastText = previouslyDeleted == null ? "" : previouslyDeleted.peek();
+        String lastText;
+        if (previouslyDeleted == null || previouslyDeleted.empty()) {
+            lastText = "";
+        } else {
+            lastText = previouslyDeleted.peek();
+        }
         int start, end;
         end = start = cursorIndex - 1; // by default only one character will be deleted
         char startChar = text.charAt(start);
