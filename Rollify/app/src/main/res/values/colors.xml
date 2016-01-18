@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="numpadBackground" type="color">#c2311d</item>
-    <item name="operatorBackground" type="color">#7b1608</item>
+    <item name="numpadBackground" type="color">#F44336</item>
+    <item name="operatorBackground" type="color">#00000000</item>
+    <item name="operatorText" type="color">#7C4DFF</item>
+    <item name="formulaSliderBackground" type="color">#1de9b6</item>
+    <item name="formulaListItem" type="color">#00695C</item>
 </resources>

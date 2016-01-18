@@ -1,13 +1,19 @@
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="com.digitalrocketry.rollify.NumpadFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="#ffffff"
+    android:id="@+id/numpadLayout"
+    tools:context="com.digitalrocketry.rollify.NumpadFragment">
 
     <android.support.v7.widget.GridLayout
-        android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        app:columnCount="5"
+        android:layout_width="0dp"
+        android:layout_weight="4"
+        app:columnCount="4"
         app:rowCount="7"
         app:useDefaultMargins="false"
         app:alignmentMode="alignBounds"
@@ -237,104 +243,6 @@
             app:layout_row="3"
             app:layout_column="3" />
 
-        <Button
-            style="@style/CalcButtonGrid"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:text="+"
-            android:id="@+id/calcButtonAdd"
-            app:layout_rowWeight="1"
-            app:layout_columnWeight="1"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:singleLine="false"
-            android:onClick="onCalcOperatorButtonPressed"
-            app:layout_row="0"
-            app:layout_column="4"
-            android:textSize="@dimen/calcOperatorButtonTextSize"
-            android:background="@color/operatorBackground" />
-
-        <Button
-            style="@style/CalcButtonGrid"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:text="-"
-            android:id="@+id/calcButtonSub"
-            app:layout_rowWeight="1"
-            app:layout_columnWeight="1"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:singleLine="false"
-            android:onClick="onCalcOperatorButtonPressed"
-            app:layout_row="1"
-            app:layout_column="4"
-            android:textSize="@dimen/calcOperatorButtonTextSize"
-            android:background="@color/operatorBackground" />
-
-        <Button
-            style="@style/CalcButtonGrid"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:text="×"
-            android:id="@+id/calcButtonMul"
-            app:layout_rowWeight="1"
-            app:layout_columnWeight="1"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:singleLine="false"
-            android:onClick="onCalcOperatorButtonPressed"
-            app:layout_row="2"
-            app:layout_column="4"
-            android:textSize="@dimen/calcOperatorButtonTextSize"
-            android:background="@color/operatorBackground" />
-
-        <Button
-            style="@style/CalcButtonGrid"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:text="÷"
-            android:id="@+id/calcButtonDiv"
-            app:layout_rowWeight="1"
-            app:layout_columnWeight="1"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:singleLine="false"
-            android:onClick="onCalcOperatorButtonPressed"
-            app:layout_row="3"
-            app:layout_column="4"
-            android:textSize="@dimen/calcOperatorButtonTextSize"
-            android:background="@color/operatorBackground" />
-
-        <RelativeLayout
-            app:layout_rowWeight="1"
-            app:layout_columnWeight="1"
-            app:layout_row="4"
-            app:layout_column="4"
-            app:layout_rowSpan="2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@color/operatorBackground" >
-
-            <Button
-                style="@style/CalcButtonGrid"
-                android:text="="
-                android:id="@+id/calcButtonEquals"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:singleLine="false"
-                android:onClick="onCalcEqualsButtonPressed"
-                android:nestedScrollingEnabled="true"
-                android:textSize="@dimen/calcEqualsButtonTextSize"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#00000000"/>
-
-            <ImageButton
-                android:id="@+id/calcButtonDone"
-                android:src="@drawable/ic_done_white_24dp"
-                android:onClick="onCalcDoneButtonPressed"
-                android:visibility="gone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="#00000000"/>
-
-        </RelativeLayout>
 
         <Button
             style="@style/CalcButtonGrid"
@@ -450,4 +358,14 @@
 
     </android.support.v7.widget.GridLayout>
 
-</FrameLayout>
+    <LinearLayout
+        android:id="@+id/numpadOperatorLayout"
+        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:background="@color/operatorBackground">
+
+        <include layout="@layout/operator_buttons" />
+    </LinearLayout>
+
+</LinearLayout>

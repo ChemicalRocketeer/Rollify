@@ -8,5 +8,6 @@
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/formulaName"
-        android:layout_margin="20dp" />
+        android:layout_margin="20dp"
+        android:textColor="@color/formulaListItem" />
 </LinearLayout>
