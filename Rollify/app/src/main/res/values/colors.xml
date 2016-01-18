@@ -5,4 +5,5 @@
     <item name="operatorText" type="color">#7C4DFF</item>
     <item name="formulaSliderBackground" type="color">#1de9b6</item>
     <item name="formulaListItem" type="color">#00695C</item>
+    <item name="formulaListExpression" type="color">#009688</item>
 </resources>

@@ -59,7 +59,9 @@ public class FormulaAdapter extends BaseAdapter{
             v = LayoutInflater.from(context).inflate(R.layout.formula_list_item, null);
         }
         String name = getItem(position).getName();
+        String expression = getItem(position).getExpression();
         ((TextView) v.findViewById(R.id.formulaName)).setText(name);
+        ((TextView) v.findViewById(R.id.expressionText)).setText(expression);
         return v;
     }
 
